@@ -1,5 +1,6 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.giovannicarmo.webserviceappoio.domain.enums.CategoriaTea;
 import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
 
@@ -34,6 +35,8 @@ public class Crianca implements Serializable {
     )
 
     private List<Usuario> usuarios = new ArrayList<>();
+
+    public Crianca(){}
 
     public Crianca(Integer id, String nome, String colegio, String foto, Date dataNascimento, Sexo sexo, CategoriaTea categoriaTea) {
         this.id = id;

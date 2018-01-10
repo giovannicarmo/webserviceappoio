@@ -27,6 +27,8 @@ public class Rotina implements Serializable {
     @JoinColumn(name = "id_crianca")
     private Crianca crianca;
 
+    public Rotina(){}
+
     public Rotina(Integer id, Date data, String atividades, String obs, TipoRotina tipo, Avaliacao comportamento,
                   Avaliacao interacao, Avaliacao humor, Avaliacao alimentacao, Usuario usuario, Crianca crianca) {
         this.id = id;

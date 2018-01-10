@@ -15,6 +15,7 @@ public class Usuario implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome, email, senha, telefone, foto;
     private Integer tipo;
 
@@ -24,8 +25,10 @@ public class Usuario implements Serializable{
     @OneToMany(mappedBy = "usuario")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "usuario")
+    @ManyToMany(mappedBy = "usuarios")
     private List<Crianca> criancas = new ArrayList<>();
+
+    public Usuario(){}
 
     public Usuario(Integer id, String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
         this.id = id;

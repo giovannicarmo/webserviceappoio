@@ -21,6 +21,8 @@ public class RecomendacaoMedica implements Serializable {
     @JoinColumn(name = "id_crianca")
     private Crianca crianca;
 
+    public RecomendacaoMedica(){}
+
     public RecomendacaoMedica(Integer id, String observacao, Usuario usuario, Crianca crianca) {
         this.id = id;
         this.observacao = observacao;
