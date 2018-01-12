@@ -33,7 +33,6 @@ public class Crianca implements Serializable {
             joinColumns = @JoinColumn(name = "id_crianca"),
             inverseJoinColumns = @JoinColumn(name = "id_usuario")
     )
-
     private List<Usuario> usuarios = new ArrayList<>();
 
     public Crianca(){}
@@ -118,6 +117,14 @@ public class Crianca implements Serializable {
 
     public void setRecomendacoesMedicas(List<RecomendacaoMedica> recomendacoesMedicas) {
         this.recomendacoesMedicas = recomendacoesMedicas;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override

@@ -28,6 +28,12 @@ public class Usuario implements Serializable{
     @ManyToMany(mappedBy = "usuarios")
     private List<Crianca> criancas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "usuario_remetente")
+    private List<Mensagem> mensagens_remetente = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario_receptor")
+    private List<Mensagem> mensagens_receptor = new ArrayList<>();
+
     public Usuario(){}
 
     public Usuario(Integer id, String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
@@ -96,12 +102,12 @@ public class Usuario implements Serializable{
         this.tipo = tipo.getId();
     }
 
-    public List<Rotina> getRotina() {
+    public List<Rotina> getRotinas() {
         return rotinas;
     }
 
-    public void setRotina(List<Rotina> rotina) {
-        this.rotinas = rotina;
+    public void setRotinas(List<Rotina> rotinas) {
+        this.rotinas = rotinas;
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {
@@ -118,6 +124,22 @@ public class Usuario implements Serializable{
 
     public void setCriancas(List<Crianca> criancas) {
         this.criancas = criancas;
+    }
+
+    public List<Mensagem> getMensagens_remetente() {
+        return mensagens_remetente;
+    }
+
+    public void setMensagens_remetente(List<Mensagem> mensagens_remetente) {
+        this.mensagens_remetente = mensagens_remetente;
+    }
+
+    public List<Mensagem> getMensagens_receptor() {
+        return mensagens_receptor;
+    }
+
+    public void setMensagens_receptor(List<Mensagem> mensagens_receptor) {
+        this.mensagens_receptor = mensagens_receptor;
     }
 
     @Override
