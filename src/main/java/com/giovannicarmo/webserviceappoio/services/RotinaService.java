@@ -6,17 +6,40 @@ import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundExce
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RotinaService {
 
     @Autowired
     private RotinaRepository repository;
 
-    public Rotina find (Integer id) {
-        Rotina rotina = repository.findOne(id);
-        if(rotina == null) {
+    public List<Rotina> findAll(){
+        return repository.findAll();
+    }
+
+    public Rotina find(Integer id) {
+        Rotina object = repository.findOne(id);
+        if(object == null) {
             throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Rotina.class.getName());
         }
-        return rotina;
+        return object;
+    }
+
+    public Rotina save(Rotina object) {
+        repository.save(object);
+        return object;
+    }
+
+    public Rotina update(Integer id, Rotina object) {
+        object = find(id);
+        repository.save(object);
+        return object;
+    }
+
+    public Rotina delete(Integer id) {
+        Rotina object = find(id);
+        repository.delete(object);
+        return object;
     }
 }
