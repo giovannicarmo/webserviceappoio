@@ -31,12 +31,6 @@ public class RecomendacaoMedicaService {
         return object;
     }
 
-    public RecomendacaoMedica update(Integer id, RecomendacaoMedica object) {
-        object = find(id);
-        repository.save(object);
-        return object;
-    }
-
     public RecomendacaoMedica delete(Integer id) {
         RecomendacaoMedica object = find(id);
         repository.delete(object);

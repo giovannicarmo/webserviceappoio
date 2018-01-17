@@ -36,8 +36,8 @@ public class MensagemResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody Mensagem object) {
-        service.update(id, object);
+    public ResponseEntity<?> update(@RequestBody Mensagem object) {
+        service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
 

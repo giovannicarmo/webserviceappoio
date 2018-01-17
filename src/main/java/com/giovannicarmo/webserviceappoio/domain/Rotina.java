@@ -16,7 +16,13 @@ public class Rotina implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date data;
-    private String atividades, obs;
+
+    @Column(length = 2000)
+    private String atividades;
+
+    @Column(length = 2000)
+    private String obs;
+
     private Integer tipo, comportamento, interacao, humor, alimentacao;
 
     @ManyToOne

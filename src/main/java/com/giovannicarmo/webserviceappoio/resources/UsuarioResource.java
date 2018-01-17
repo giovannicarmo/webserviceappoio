@@ -37,8 +37,8 @@ public class UsuarioResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody Usuario object) {
-        service.update(id, object);
+    public ResponseEntity<?> update(@RequestBody Usuario object) {
+        service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
 

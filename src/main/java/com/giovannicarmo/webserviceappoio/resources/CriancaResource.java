@@ -36,8 +36,8 @@ public class CriancaResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody Crianca object) {
-        service.update(id, object);
+    public ResponseEntity<?> update(@RequestBody Crianca object) {
+        service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
 

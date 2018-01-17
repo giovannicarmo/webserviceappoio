@@ -31,12 +31,6 @@ public class MensagemService {
         return object;
     }
 
-    public Mensagem update(Integer id, Mensagem object) {
-        object = find(id);
-        repository.save(object);
-        return object;
-    }
-
     public Mensagem delete(Integer id) {
         Mensagem object = find(id);
         repository.delete(object);

@@ -30,12 +30,6 @@ public class UsuarioService {
         return object;
     }
 
-    public Usuario update(Integer id, Usuario object) {
-        object = find(id);
-        repository.save(object);
-        return object;
-    }
-
     public Usuario delete(Integer id) {
         Usuario object = find(id);
         repository.delete(object);

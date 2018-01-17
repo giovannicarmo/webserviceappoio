@@ -12,7 +12,10 @@ public class Mensagem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String corpo, anexo;
+    @Column(length = 2000)
+    private String corpo;
+
+    private String anexo;
 
    @ManyToOne
    @JoinColumn(name = "id_usuario_remetente")

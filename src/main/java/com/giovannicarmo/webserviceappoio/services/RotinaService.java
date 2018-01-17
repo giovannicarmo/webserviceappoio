@@ -31,12 +31,6 @@ public class RotinaService {
         return object;
     }
 
-    public Rotina update(Integer id, Rotina object) {
-        object = find(id);
-        repository.save(object);
-        return object;
-    }
-
     public Rotina delete(Integer id) {
         Rotina object = find(id);
         repository.delete(object);

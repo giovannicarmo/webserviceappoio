@@ -31,12 +31,6 @@ public class CriancaService {
         return object;
     }
 
-    public Crianca update(Integer id, Crianca object) {
-        object = find(id);
-        repository.save(object);
-        return object;
-    }
-
     public Crianca delete(Integer id) {
         Crianca object = find(id);
         repository.delete(object);

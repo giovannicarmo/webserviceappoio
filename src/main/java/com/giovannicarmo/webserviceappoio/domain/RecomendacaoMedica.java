@@ -11,6 +11,8 @@ public class RecomendacaoMedica implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(length = 2000)
     private String observacao;
 
     @ManyToOne
