@@ -34,7 +34,7 @@ public class RotinaResource {
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> update(@RequestBody Rotina object) {
         service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
