@@ -17,14 +17,6 @@ public class Mensagem implements Serializable {
 
     private String anexo;
 
-   @ManyToOne
-   @JoinColumn(name = "id_usuario_remetente")
-   private Usuario usuario_remetente;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_receptor")
-    private Usuario usuario_receptor;
-
     public Mensagem(){}
 
     public Mensagem(Integer id, String corpo, String anexo, Usuario usuario_remetente, Usuario usuario_receptor) {
@@ -32,8 +24,6 @@ public class Mensagem implements Serializable {
         this.id = id;
         this.corpo = corpo;
         this.anexo = anexo;
-        this.usuario_remetente = usuario_remetente;
-        this.usuario_receptor = usuario_receptor;
     }
 
     public Integer getId() {
@@ -58,22 +48,6 @@ public class Mensagem implements Serializable {
 
     public void setAnexo(String anexo) {
         this.anexo = anexo;
-    }
-
-    public Usuario getUsuario_remetente() {
-        return usuario_remetente;
-    }
-
-    public void setUsuario_remetente(Usuario usuario_remetente) {
-        this.usuario_remetente = usuario_remetente;
-    }
-
-    public Usuario getUsuario_receptor() {
-        return usuario_receptor;
-    }
-
-    public void setUsuario_receptor(Usuario usuario_receptor) {
-        this.usuario_receptor = usuario_receptor;
     }
 
     @Override

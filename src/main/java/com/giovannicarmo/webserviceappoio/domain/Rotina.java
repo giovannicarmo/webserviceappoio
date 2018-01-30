@@ -1,5 +1,7 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.giovannicarmo.webserviceappoio.domain.enums.Avaliacao;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoRotina;
 
@@ -12,9 +14,10 @@ import java.util.Objects;
 public class Rotina implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @EmbeddedId
+    private RotinaPK id = new RotinaPK();
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data;
 
     @Column(length = 2000)
@@ -23,21 +26,19 @@ public class Rotina implements Serializable {
     @Column(length = 2000)
     private String obs;
 
-    private Integer tipo, comportamento, interacao, humor, alimentacao;
+    private Integer tipo;
+    private Integer comportamento;
+    private Integer interacao;
+    private Integer humor;
+    private Integer alimentacao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    public Rotina() {
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "id_crianca")
-    private Crianca crianca;
-
-    public Rotina(){}
-
-    public Rotina(Integer id, Date data, String atividades, String obs, TipoRotina tipo, Avaliacao comportamento,
-                  Avaliacao interacao, Avaliacao humor, Avaliacao alimentacao, Usuario usuario, Crianca crianca) {
-        this.id = id;
+    public Rotina(Usuario usuario, Crianca crianca, Date data, String atividades, String obs, TipoRotina tipo,
+                  Avaliacao comportamento, Avaliacao interacao, Avaliacao humor, Avaliacao alimentacao) {
+        id.setUsuario(usuario);
+        id.setCrianca(crianca);
         this.data = data;
         this.atividades = atividades;
         this.obs = obs;
@@ -46,15 +47,19 @@ public class Rotina implements Serializable {
         this.interacao = interacao.getId();
         this.humor = humor.getId();
         this.alimentacao = alimentacao.getId();
-        this.usuario = usuario;
-        this.crianca = crianca;
     }
 
-    public Integer getId() {
-        return id;
+    @JsonIgnore
+    public Usuario getUsuario() {
+        return id.getUsuario();
     }
 
-    public void setId(Integer id) {
+    @JsonIgnore
+    public Crianca getCrianca() {
+        return id.getCrianca();
+    }
+
+    public void setId(RotinaPK id) {
         this.id = id;
     }
 
@@ -122,32 +127,16 @@ public class Rotina implements Serializable {
         this.alimentacao = alimentacao.getId();
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Crianca getCrianca() {
-        return crianca;
-    }
-
-    public void setCrianca(Crianca crianca) {
-        this.crianca = crianca;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Rotina)) return false;
         Rotina rotina = (Rotina) o;
-        return Objects.equals(getId(), rotina.getId());
+        return Objects.equals(id, rotina.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id);
     }
 }

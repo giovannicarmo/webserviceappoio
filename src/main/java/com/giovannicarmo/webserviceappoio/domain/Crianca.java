@@ -1,5 +1,6 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.giovannicarmo.webserviceappoio.domain.enums.CategoriaTea;
 import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
@@ -18,16 +19,21 @@ public class Crianca implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome, colegio, foto;
-    private Date dataNascimento;
-    private Integer sexo, categoriaTea;
 
-    @OneToMany(mappedBy = "crianca")
-    private List<Rotina> rotina = new ArrayList<>();
+    private String nome;
+    private String colegio;
+    private String foto;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataNascimento;
+
+    private Integer sexo;
+    private Integer categoriaTea;
 
     @OneToMany(mappedBy = "crianca")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "CRIANCA_USUARIO",
             joinColumns = @JoinColumn(name = "id_crianca"),
@@ -101,14 +107,6 @@ public class Crianca implements Serializable {
 
     public void setCategoriaTea(CategoriaTea categoriaTea) {
         this.categoriaTea = categoriaTea.getId();
-    }
-
-    public List<Rotina> getRotina() {
-        return rotina;
-    }
-
-    public void setRotina(List<Rotina> rotina) {
-        this.rotina = rotina;
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {

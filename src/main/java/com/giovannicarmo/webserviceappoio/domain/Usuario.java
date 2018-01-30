@@ -16,23 +16,18 @@ public class Usuario implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome, email, senha, telefone, foto;
+    private String nome;
+    private String email;
+    private String senha;
+    private String telefone;
+    private String foto;
     private Integer tipo;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Rotina> rotinas = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Crianca> criancas = new ArrayList<>();
-
-    @OneToMany(mappedBy = "usuario_remetente")
-    private List<Mensagem> mensagens_remetente = new ArrayList<>();
-
-    @OneToMany(mappedBy = "usuario_receptor")
-    private List<Mensagem> mensagens_receptor = new ArrayList<>();
 
     public Usuario(){}
 
@@ -102,14 +97,6 @@ public class Usuario implements Serializable{
         this.tipo = tipo.getId();
     }
 
-    public List<Rotina> getRotinas() {
-        return rotinas;
-    }
-
-    public void setRotinas(List<Rotina> rotinas) {
-        this.rotinas = rotinas;
-    }
-
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {
         return recomendacoesMedicas;
     }
@@ -124,22 +111,6 @@ public class Usuario implements Serializable{
 
     public void setCriancas(List<Crianca> criancas) {
         this.criancas = criancas;
-    }
-
-    public List<Mensagem> getMensagens_remetente() {
-        return mensagens_remetente;
-    }
-
-    public void setMensagens_remetente(List<Mensagem> mensagens_remetente) {
-        this.mensagens_remetente = mensagens_remetente;
-    }
-
-    public List<Mensagem> getMensagens_receptor() {
-        return mensagens_receptor;
-    }
-
-    public void setMensagens_receptor(List<Mensagem> mensagens_receptor) {
-        this.mensagens_receptor = mensagens_receptor;
     }
 
     @Override
