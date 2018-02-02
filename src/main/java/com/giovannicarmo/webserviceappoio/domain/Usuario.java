@@ -1,12 +1,11 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Usuario implements Serializable{
@@ -23,11 +22,24 @@ public class Usuario implements Serializable{
     private String foto;
     private Integer tipo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Crianca> criancas = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.usuario")
+    private Set<Rotina> rotinas = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.usuarioRemetente")
+    private Set<MensagemUsuario> usuariosRemetente = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.usuarioReceptor")
+    private Set<MensagemUsuario> usuariosReceptor = new HashSet<>();
 
     public Usuario(){}
 
@@ -39,6 +51,24 @@ public class Usuario implements Serializable{
         this.telefone = telefone;
         this.foto = foto;
         this.tipo = tipo.getId();
+    }
+
+    @JsonIgnore
+    public List<Crianca> getRotinaCriancas() {
+        List<Crianca> list = new ArrayList<>();
+        for (Rotina x : rotinas) {
+            list.add(x.getCrianca());
+        }
+        return list;
+    }
+
+    @JsonIgnore
+    public List<Usuario> getMensagemUsuarios() {
+        List<Usuario> list = new ArrayList<>();
+        for (MensagemUsuario x : usuariosReceptor) {
+            list.add(x.getUsuarioRemetente());
+        }
+        return list;
     }
 
     public Integer getId() {
@@ -111,6 +141,30 @@ public class Usuario implements Serializable{
 
     public void setCriancas(List<Crianca> criancas) {
         this.criancas = criancas;
+    }
+
+    public Set<Rotina> getRotinas() {
+        return rotinas;
+    }
+
+    public void setRotinas(Set<Rotina> rotinas) {
+        this.rotinas = rotinas;
+    }
+
+    public Set<MensagemUsuario> getUsuariosRemetente() {
+        return usuariosRemetente;
+    }
+
+    public void setUsuariosRemetente(Set<MensagemUsuario> usuariosRemetente) {
+        this.usuariosRemetente = usuariosRemetente;
+    }
+
+    public Set<MensagemUsuario> getUsuariosReceptor() {
+        return usuariosReceptor;
+    }
+
+    public void setUsuariosReceptor(Set<MensagemUsuario> usuariosReceptor) {
+        this.usuariosReceptor = usuariosReceptor;
     }
 
     @Override

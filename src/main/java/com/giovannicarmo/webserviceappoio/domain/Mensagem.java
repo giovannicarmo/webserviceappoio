@@ -19,7 +19,7 @@ public class Mensagem implements Serializable {
 
     public Mensagem(){}
 
-    public Mensagem(Integer id, String corpo, String anexo, Usuario usuario_remetente, Usuario usuario_receptor) {
+    public Mensagem(Integer id, String corpo, String anexo) {
 
         this.id = id;
         this.corpo = corpo;

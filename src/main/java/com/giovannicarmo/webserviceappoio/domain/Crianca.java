@@ -7,10 +7,7 @@ import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Crianca implements Serializable {
@@ -40,6 +37,9 @@ public class Crianca implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_usuario")
     )
     private List<Usuario> usuarios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.crianca")
+    private Set<Rotina> rotinas = new HashSet<>();
 
     public Crianca(){}
 
@@ -123,6 +123,14 @@ public class Crianca implements Serializable {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public Set<Rotina> getRotinas() {
+        return rotinas;
+    }
+
+    public void setRotinas(Set<Rotina> rotinas) {
+        this.rotinas = rotinas;
     }
 
     @Override

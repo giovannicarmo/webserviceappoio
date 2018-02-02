@@ -1,7 +1,7 @@
 package com.giovannicarmo.webserviceappoio.resources;
 
-import com.giovannicarmo.webserviceappoio.domain.Mensagem;
-import com.giovannicarmo.webserviceappoio.services.MensagemService;
+import com.giovannicarmo.webserviceappoio.domain.MensagemUsuario;
+import com.giovannicarmo.webserviceappoio.services.MensagemUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,31 +12,31 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/mensagens")
-public class MensagemResource {
+public class MensagemUsuarioResource {
 
     @Autowired
-    MensagemService service;
+    MensagemUsuarioService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
-        List<Mensagem> objects = service.findAll();
+        List<MensagemUsuario> objects = service.findAll();
         return ResponseEntity.ok().body(objects);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Integer id) {
-        Mensagem object = service.find(id);
+        MensagemUsuario object = service.find(id);
         return ResponseEntity.ok().body(object);
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Mensagem object) {
+    public ResponseEntity<?> save(@RequestBody MensagemUsuario object) {
         object = service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> update(@RequestBody Mensagem object) {
+    public ResponseEntity<?> update(@RequestBody MensagemUsuario object) {
         service.save(object);
         return new ResponseEntity<Object>(object, HttpStatus.OK);
     }
