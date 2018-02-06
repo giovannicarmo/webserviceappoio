@@ -19,8 +19,8 @@ public class CriancaResource {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
-        List<Crianca> objects = service.findAll();
-        return ResponseEntity.ok().body(objects);
+        List<Crianca> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)

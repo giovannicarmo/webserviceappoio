@@ -18,8 +18,8 @@ public class RotinaResource {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
-        List<Rotina> objects = service.findAll();
-        return ResponseEntity.ok().body(objects);
+        List<Rotina> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)

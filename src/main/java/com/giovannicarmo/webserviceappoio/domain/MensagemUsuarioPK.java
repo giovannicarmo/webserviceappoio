@@ -1,5 +1,7 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,10 +12,12 @@ import java.util.Objects;
 public class MensagemUsuarioPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario_remetente")
     private Usuario usuarioRemetente;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario_receptor")
     private Usuario usuarioReceptor;

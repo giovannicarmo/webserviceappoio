@@ -19,8 +19,8 @@ public class MensagemUsuarioResource {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
-        List<MensagemUsuario> objects = service.findAll();
-        return ResponseEntity.ok().body(objects);
+        List<MensagemUsuario> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)

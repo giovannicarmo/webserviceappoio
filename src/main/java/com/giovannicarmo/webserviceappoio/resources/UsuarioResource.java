@@ -2,13 +2,18 @@ package com.giovannicarmo.webserviceappoio.resources;
 
 
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
+import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioDTO;
 import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -18,33 +23,37 @@ public class UsuarioResource {
     UsuarioService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> listAll(){
-        List<Usuario> objects = service.findAll();
-        return ResponseEntity.ok().body(objects);
+    public ResponseEntity<List<UsuarioDTO>> findAll(){
+        List<Usuario> list = service.findAll();
+        List<UsuarioDTO> objectDTOS = list.stream().map(object -> new UsuarioDTO(object)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(objectDTOS);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
+    public ResponseEntity<Usuario> find(@PathVariable Integer id) {
         Usuario object = service.find(id);
         return ResponseEntity.ok().body(object);
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Usuario object) {
-        object = service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    public ResponseEntity<Usuario> save(@RequestBody Usuario object) {
+        object = service.insert(object);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(object.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> update(@RequestBody Usuario object) {
-        service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario object, @PathVariable Integer id) {
+        object.setId(id);
+        service.update(object);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<Usuario> delete(@PathVariable Integer id){
        service.delete(id);
-       return new ResponseEntity<>(HttpStatus.OK);
+       return ResponseEntity.noContent().build();
     }
 
 }

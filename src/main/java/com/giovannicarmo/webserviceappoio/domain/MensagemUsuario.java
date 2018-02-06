@@ -30,10 +30,12 @@ public class MensagemUsuario implements Serializable {
         this.dataEnvio = dataEnvio;
     }
 
+    @JsonIgnore
     public Usuario getUsuarioRemetente(){
         return id.getUsuarioRemetente();
     }
 
+    @JsonIgnore
     public Usuario getUsuarioReceptor(){
         return id.getUsuarioRemetente();
     }

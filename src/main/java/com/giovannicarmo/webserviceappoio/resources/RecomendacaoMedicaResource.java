@@ -19,8 +19,8 @@ public class RecomendacaoMedicaResource {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
-        List<RecomendacaoMedica> objects = service.findAll();
-        return ResponseEntity.ok().body(objects);
+        List<RecomendacaoMedica> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)
