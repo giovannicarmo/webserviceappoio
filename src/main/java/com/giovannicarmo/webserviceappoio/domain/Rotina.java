@@ -59,6 +59,10 @@ public class Rotina implements Serializable {
         return id.getCrianca();
     }
 
+    public RotinaPK getId() {
+        return id;
+    }
+
     public void setId(RotinaPK id) {
         this.id = id;
     }

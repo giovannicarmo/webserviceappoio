@@ -2,8 +2,10 @@ package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.RecomendacaoMedica;
 import com.giovannicarmo.webserviceappoio.repositories.RecomendacaoMedicaRepository;
+import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,14 +28,27 @@ public class RecomendacaoMedicaService {
         return object;
     }
 
-    public RecomendacaoMedica save(RecomendacaoMedica object) {
-        repository.save(object);
-        return object;
+    public RecomendacaoMedica insert(RecomendacaoMedica object) {
+        object.setId(null);
+        return repository.save(object);
     }
 
-    public RecomendacaoMedica delete(Integer id) {
-        RecomendacaoMedica object = find(id);
-        repository.delete(object);
-        return object;
+    public RecomendacaoMedica update(RecomendacaoMedica object) {
+        RecomendacaoMedica newObject = find(object.getId());
+        updateData(newObject, object);
+        return repository.save(newObject);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try{
+            repository.delete(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
+        }
+    }
+
+    private void updateData(RecomendacaoMedica newObject, RecomendacaoMedica object) {
+       newObject.setObservacao(object.getObservacao());
     }
 }

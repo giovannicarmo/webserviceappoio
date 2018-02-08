@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/recomendacoesMedicas")
@@ -18,32 +21,35 @@ public class RecomendacaoMedicaResource {
     RecomendacaoMedicaService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> listAll(){
+    public ResponseEntity<List<RecomendacaoMedica>> findAll(){
         List<RecomendacaoMedica> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
+    public ResponseEntity<RecomendacaoMedica> find(@PathVariable Integer id) {
         RecomendacaoMedica object = service.find(id);
         return ResponseEntity.ok().body(object);
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody RecomendacaoMedica object) {
-        object = service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    public ResponseEntity<RecomendacaoMedica> save(@RequestBody RecomendacaoMedica object) {
+        object = service.insert(object);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(object.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> update(@RequestBody RecomendacaoMedica object) {
-        service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<RecomendacaoMedica> update(@Valid @RequestBody RecomendacaoMedica object, @PathVariable Integer id) {
+        object.setId(id);
+        service.update(object);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<RecomendacaoMedica> delete(@PathVariable Integer id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -30,11 +30,6 @@ public class UsuarioService {
         return object;
     }
 
-    public Page<Usuario> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
-        PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repository.findAll(pageRequest);
-    }
-
     public Usuario insert(Usuario object) {
         object.setId(null);
         return repository.save(object);

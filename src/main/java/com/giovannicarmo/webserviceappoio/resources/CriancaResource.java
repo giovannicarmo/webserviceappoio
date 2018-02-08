@@ -1,14 +1,18 @@
 package com.giovannicarmo.webserviceappoio.resources;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
+import com.giovannicarmo.webserviceappoio.domain.dto.CriancaDTO;
 import com.giovannicarmo.webserviceappoio.services.CriancaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/criancas")
@@ -18,32 +22,36 @@ public class CriancaResource {
     CriancaService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> listAll(){
+    public ResponseEntity<List<CriancaDTO>> findAll(){
         List<Crianca> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<CriancaDTO> objectDTOS = list.stream().map(object -> new CriancaDTO(object)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(objectDTOS);
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
+    public ResponseEntity<Crianca> find(@PathVariable Integer id) {
         Crianca object = service.find(id);
         return ResponseEntity.ok().body(object);
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Crianca object) {
-        object = service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    public ResponseEntity<Crianca> save(@RequestBody Crianca object) {
+        object = service.insert(object);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(object.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> update(@RequestBody Crianca object) {
-        service.save(object);
-        return new ResponseEntity<Object>(object, HttpStatus.OK);
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Crianca> update(@Valid @RequestBody Crianca object, @PathVariable Integer id) {
+        object.setId(id);
+        service.update(object);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<Crianca> delete(@PathVariable Integer id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }

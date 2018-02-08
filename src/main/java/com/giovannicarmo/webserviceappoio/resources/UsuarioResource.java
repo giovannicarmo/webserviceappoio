@@ -43,7 +43,7 @@ public class UsuarioResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario object, @PathVariable Integer id) {
         object.setId(id);
         service.update(object);
@@ -55,5 +55,4 @@ public class UsuarioResource {
        service.delete(id);
        return ResponseEntity.noContent().build();
     }
-
 }
