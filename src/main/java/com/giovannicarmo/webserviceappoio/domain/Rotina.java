@@ -17,6 +17,9 @@ public class Rotina implements Serializable {
     @EmbeddedId
     private RotinaPK id = new RotinaPK();
 
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
+    private Date dataCriacao;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data;
 
@@ -35,14 +38,15 @@ public class Rotina implements Serializable {
     public Rotina() {
     }
 
-    public Rotina(Usuario usuario, Crianca crianca, Date data, String atividades, String obs, TipoRotina tipo,
+    public Rotina(Usuario usuario, Crianca crianca, Date dataCriacao,Date data, TipoRotina tipo, String atividades, String obs,
                   Avaliacao comportamento, Avaliacao interacao, Avaliacao humor, Avaliacao alimentacao) {
         id.setUsuario(usuario);
         id.setCrianca(crianca);
+        this.dataCriacao = dataCriacao;
         this.data = data;
+        this.tipo = tipo.getId();
         this.atividades = atividades;
         this.obs = obs;
-        this.tipo = tipo.getId();
         this.comportamento = comportamento.getId();
         this.interacao = interacao.getId();
         this.humor = humor.getId();
@@ -65,6 +69,14 @@ public class Rotina implements Serializable {
 
     public void setId(RotinaPK id) {
         this.id = id;
+    }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public Date getData() {

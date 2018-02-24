@@ -66,23 +66,23 @@ public class WebserviceappoioApplication implements CommandLineRunner{
 				"anim id est laborum.", usuario1, crianca2);
 
 
-		Rotina rotina1 = new Rotina(usuario1, crianca1, sdf.parse("01/02/2018"),
+		Rotina rotina1 = new Rotina(usuario1, crianca1, sdf.parse("01/02/2018 12:09"),sdf.parse("01/02/2018"), TipoRotina.ESCOLA,
 				"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
 						"ut labore et dolore magna aliqua.",
 				"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo" +
 						"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu" +
 						"fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui" +
 						"officia deserunt mollit anim id est laborum.",
-				TipoRotina.ESCOLA, Avaliacao.BOM, Avaliacao.REGULAR, Avaliacao.REGULAR, Avaliacao.BOM);
+				Avaliacao.BOM, Avaliacao.REGULAR, Avaliacao.REGULAR, Avaliacao.BOM);
 
-		Rotina rotina2 = new Rotina(usuario2, crianca2, sdf.parse("01/02/2018"),
+		Rotina rotina2 = new Rotina(usuario2, crianca2, sdf.parse("22/02/2018 17:49"), sdf.parse("22/02/2018"), TipoRotina.CASA,
 				"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
 						"ut labore et dolore magna aliqua.",
 				"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo" +
 						"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu" +
 						"fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui" +
 						"officia deserunt mollit anim id est laborum.",
-				TipoRotina.CASA, Avaliacao.RUIM, Avaliacao.REGULAR, Avaliacao.REGULAR, Avaliacao.OTIMO);
+				Avaliacao.RUIM, Avaliacao.REGULAR, Avaliacao.REGULAR, Avaliacao.OTIMO);
 
 
 		Mensagem mensagem = new Mensagem(null, "Ola, tudo bem?", "imagem.img");

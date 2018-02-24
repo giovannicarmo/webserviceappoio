@@ -38,6 +38,7 @@ public class Crianca implements Serializable {
     )
     private List<Usuario> usuarios = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.crianca")
     private Set<Rotina> rotinas = new HashSet<>();
 
