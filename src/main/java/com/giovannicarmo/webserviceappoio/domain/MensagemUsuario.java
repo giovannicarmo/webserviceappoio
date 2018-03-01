@@ -3,8 +3,7 @@ package com.giovannicarmo.webserviceappoio.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -13,43 +12,44 @@ import java.util.Objects;
 public class MensagemUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private MensagemUsuarioPK id = new MensagemUsuarioPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private Date dataEnvio;
 
+    @Column(length = 2000)
+    private String corpo;
+
+    private String anexo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario_remetente")
+    private Usuario usuarioRemetente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario_receptor")
+    private Usuario usuarioReceptor;
+
     public MensagemUsuario() {
     }
 
-    public MensagemUsuario(Usuario usuarioRemetente, Usuario usuarioReceptor, Mensagem mensagem, Date dataEnvio) {
-
-        id.setUsuarioRemetente(usuarioRemetente);
-        id.setUsuarioReceptor(usuarioReceptor);
-        id.setMensagem(mensagem);
+    public MensagemUsuario(Integer id, Usuario usuarioRemetente, Usuario usuarioReceptor,
+                           Date dataEnvio, String corpo, String anexo) {
+        this.id = id;
+        this.usuarioRemetente = (usuarioRemetente);
+        this.usuarioReceptor = (usuarioReceptor);
         this.dataEnvio = dataEnvio;
+        this.corpo = corpo;
+        this.anexo = anexo;
     }
 
-    @JsonIgnore
-    public Usuario getUsuarioRemetente(){
-        return id.getUsuarioRemetente();
-    }
-
-    @JsonIgnore
-    public Usuario getUsuarioReceptor(){
-        return id.getUsuarioRemetente();
-    }
-
-    @JsonIgnore
-    public Mensagem getMensagem(){
-        return id.getMensagem();
-    }
-
-    public MensagemUsuarioPK getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(MensagemUsuarioPK id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,6 +59,38 @@ public class MensagemUsuario implements Serializable {
 
     public void setDataEnvio(Date dataEnvio) {
         this.dataEnvio = dataEnvio;
+    }
+
+    public Usuario getUsuarioRemetente() {
+        return usuarioRemetente;
+    }
+
+    public void setUsuarioRemetente(Usuario usuarioRemetente) {
+        this.usuarioRemetente = usuarioRemetente;
+    }
+
+    public Usuario getUsuarioReceptor() {
+        return usuarioReceptor;
+    }
+
+    public void setUsuarioReceptor(Usuario usuarioReceptor) {
+        this.usuarioReceptor = usuarioReceptor;
+    }
+
+    public String getCorpo() {
+        return corpo;
+    }
+
+    public void setCorpo(String corpo) {
+        this.corpo = corpo;
+    }
+
+    public String getAnexo() {
+        return anexo;
+    }
+
+    public void setAnexo(String anexo) {
+        this.anexo = anexo;
     }
 
     @Override

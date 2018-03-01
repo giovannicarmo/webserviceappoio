@@ -1,7 +1,6 @@
 package com.giovannicarmo.webserviceappoio.resources;
 
 import com.giovannicarmo.webserviceappoio.domain.MensagemUsuario;
-import com.giovannicarmo.webserviceappoio.domain.MensagemUsuarioPK;
 import com.giovannicarmo.webserviceappoio.services.MensagemUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +17,16 @@ public class MensagemUsuarioResource {
     @Autowired
     MensagemUsuarioService service;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> listAll(){
-        List<MensagemUsuario> list = service.findAll();
+    @RequestMapping(value = "/chats", method = RequestMethod.GET)
+    public ResponseEntity<List<MensagemUsuario>> list(
+            @RequestParam(value = "remetente", defaultValue = "") Integer remetenteId,
+            @RequestParam(value = "receptor", defaultValue = "") Integer receptorId) {
+        List<MensagemUsuario> list = service.listChat(remetenteId, receptorId);
         return ResponseEntity.ok().body(list);
     }
 
-    @RequestMapping(value= "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<MensagemUsuario> find(@PathVariable MensagemUsuarioPK id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<MensagemUsuario> find(@PathVariable MensagemUsuario id) {
         MensagemUsuario object = service.find(id);
         return ResponseEntity.ok().body(object);
     }
@@ -39,7 +40,7 @@ public class MensagemUsuarioResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<MensagemUsuario> delete(@PathVariable MensagemUsuarioPK id){
+    public ResponseEntity<MensagemUsuario> delete(@PathVariable MensagemUsuario id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

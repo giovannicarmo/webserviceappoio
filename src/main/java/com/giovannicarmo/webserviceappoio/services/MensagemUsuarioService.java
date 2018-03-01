@@ -2,7 +2,6 @@ package com.giovannicarmo.webserviceappoio.services;
 
 
 import com.giovannicarmo.webserviceappoio.domain.MensagemUsuario;
-import com.giovannicarmo.webserviceappoio.domain.MensagemUsuarioPK;
 import com.giovannicarmo.webserviceappoio.repositories.MensagemUsuarioRepository;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
@@ -18,12 +17,12 @@ public class MensagemUsuarioService {
     @Autowired
     private MensagemUsuarioRepository repository;
 
-    public List<MensagemUsuario> findAll(){
-        return repository.findAll();
+    public List<MensagemUsuario> listChat(Integer usuarioRemetenteId, Integer usuarioReceptorId) {
+        return repository.chats(usuarioRemetenteId, usuarioReceptorId);
     }
 
-    public MensagemUsuario find(MensagemUsuarioPK id) {
-        MensagemUsuario object = repository.findOne(id);
+    public MensagemUsuario find(MensagemUsuario id) {
+        MensagemUsuario object = null; //repository.findOne(id);
         if(object == null) {
             throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + MensagemUsuario.class.getName());
         }
@@ -35,10 +34,10 @@ public class MensagemUsuarioService {
         return repository.save(object);
     }
 
-    public void delete(MensagemUsuarioPK id) {
+    public void delete(MensagemUsuario id) {
         find(id);
         try{
-            repository.delete(id);
+            //repository.delete(id);
         } catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
         }

@@ -23,8 +23,6 @@ public class WebserviceappoioApplication implements CommandLineRunner{
 	@Autowired
 	private RotinaRepository rotinaRepository;
 	@Autowired
-	private MensagemRepository mensagemRepository;
-	@Autowired
 	private MensagemUsuarioRepository mensagemUsuarioRepository;
 
 	public static void main(String[] args) {
@@ -84,10 +82,7 @@ public class WebserviceappoioApplication implements CommandLineRunner{
 						"officia deserunt mollit anim id est laborum.",
 				Avaliacao.RUIM, Avaliacao.REGULAR, Avaliacao.REGULAR, Avaliacao.OTIMO);
 
-
-		Mensagem mensagem = new Mensagem(null, "Ola, tudo bem?", "imagem.img");
-
-		MensagemUsuario mensagemUsuario = new MensagemUsuario(usuario1, usuario2, mensagem, sdf.parse("02/02/2018 18:18"));
+		MensagemUsuario mensagemUsuario = new MensagemUsuario(null, usuario1, usuario2, sdf.parse("02/02/2018 18:18"), "corpo", "anexo");
 
 		usuario1.getRotinas().addAll(Arrays.asList(rotina1));
 
@@ -101,7 +96,6 @@ public class WebserviceappoioApplication implements CommandLineRunner{
 		criancaRepository.save(Arrays.asList(crianca1, crianca2));
 		medicaRepository.save(Arrays.asList(recomendacaoMedica1, recomendacaoMedica2));
 		rotinaRepository.save(Arrays.asList(rotina1, rotina2));
-		mensagemRepository.save(Arrays.asList(mensagem));
 		mensagemUsuarioRepository.save(Arrays.asList(mensagemUsuario));
 	}
 }

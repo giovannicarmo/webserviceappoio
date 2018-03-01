@@ -39,7 +39,7 @@ public class Crianca implements Serializable {
     private List<Usuario> usuarios = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id.crianca")
+    @OneToMany(mappedBy = "crianca")
     private Set<Rotina> rotinas = new HashSet<>();
 
     public Crianca(){}

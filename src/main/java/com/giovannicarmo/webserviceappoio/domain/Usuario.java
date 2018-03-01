@@ -30,15 +30,15 @@ public class Usuario implements Serializable{
     private List<Crianca> criancas = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id.usuario")
+    @OneToMany(mappedBy = "usuario")
     private Set<Rotina> rotinas = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id.usuarioRemetente")
+    @OneToMany(mappedBy = "usuarioRemetente")
     private Set<MensagemUsuario> usuariosRemetente = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id.usuarioReceptor")
+    @OneToMany(mappedBy = "usuarioReceptor")
     private Set<MensagemUsuario> usuariosReceptor = new HashSet<>();
 
     public Usuario(){}

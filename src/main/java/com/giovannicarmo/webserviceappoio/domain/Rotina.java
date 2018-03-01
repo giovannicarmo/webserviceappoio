@@ -14,8 +14,17 @@ import java.util.Objects;
 public class Rotina implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private RotinaPK id = new RotinaPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_crianca")
+    private Crianca crianca;
 
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private Date dataCriacao;
@@ -38,10 +47,10 @@ public class Rotina implements Serializable {
     public Rotina() {
     }
 
-    public Rotina(Usuario usuario, Crianca crianca, Date dataCriacao,Date data, TipoRotina tipo, String atividades, String obs,
+    public Rotina(Usuario usuario, Crianca crianca, Date dataCriacao, Date data, TipoRotina tipo, String atividades, String obs,
                   Avaliacao comportamento, Avaliacao interacao, Avaliacao humor, Avaliacao alimentacao) {
-        id.setUsuario(usuario);
-        id.setCrianca(crianca);
+        this.usuario = (usuario);
+        this.crianca = (crianca);
         this.dataCriacao = dataCriacao;
         this.data = data;
         this.tipo = tipo.getId();
@@ -53,22 +62,27 @@ public class Rotina implements Serializable {
         this.alimentacao = alimentacao.getId();
     }
 
-    @JsonIgnore
-    public Usuario getUsuario() {
-        return id.getUsuario();
-    }
-
-    @JsonIgnore
-    public Crianca getCrianca() {
-        return id.getCrianca();
-    }
-
-    public RotinaPK getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(RotinaPK id) {
-        this.id = id;
+    public void setId(Integer id) { this.id = id; }
+
+    @JsonIgnore
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Crianca getCrianca() {
+        return crianca;
+    }
+
+    public void setCrianca(Crianca crianca) {
+        this.crianca = crianca;
     }
 
     public Date getDataCriacao() {
@@ -148,11 +162,11 @@ public class Rotina implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Rotina)) return false;
         Rotina rotina = (Rotina) o;
-        return Objects.equals(id, rotina.id);
+        return Objects.equals(getId(), rotina.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 }
