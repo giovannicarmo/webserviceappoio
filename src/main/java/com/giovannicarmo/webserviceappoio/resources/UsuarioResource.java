@@ -3,6 +3,7 @@ package com.giovannicarmo.webserviceappoio.resources;
 
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioDTO;
+import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioNewDTO;
 import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,8 @@ public class UsuarioResource {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<Usuario> save(@RequestBody Usuario object) {
+    public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioNewDTO objectDTO) {
+        Usuario object = service.fromDTO(objectDTO);
         object = service.insert(object);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(object.getId()).toUri();

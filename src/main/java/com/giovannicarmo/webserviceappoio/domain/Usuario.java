@@ -1,11 +1,13 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.giovannicarmo.webserviceappoio.domain.enums.Profile;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Usuario implements Serializable{
@@ -17,10 +19,17 @@ public class Usuario implements Serializable{
 
     private String nome;
     private String email;
+
+    @JsonIgnore
     private String senha;
+
     private String telefone;
     private String foto;
     private Integer tipo;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name="PERFIS")
+    private Set<Integer> profiles = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
@@ -41,16 +50,17 @@ public class Usuario implements Serializable{
     @OneToMany(mappedBy = "usuarioReceptor")
     private Set<MensagemUsuario> usuariosReceptor = new HashSet<>();
 
-    public Usuario(){}
+    public Usuario(){ addProfile(Profile.CLIENT); }
 
-    public Usuario(Integer id, String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
-        this.id = id;
+    public Usuario(String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
+
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
         this.foto = foto;
-        this.tipo = tipo.getId();
+        this.tipo = (tipo == null) ? null : tipo.getId();
+        addProfile(Profile.CLIENT);
     }
 
     @JsonIgnore
@@ -125,6 +135,14 @@ public class Usuario implements Serializable{
 
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo.getId();
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void addProfile(Profile profile) {
+        profiles.add(profile.getId());
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {

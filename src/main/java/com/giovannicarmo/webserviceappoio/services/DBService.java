@@ -4,6 +4,7 @@ import com.giovannicarmo.webserviceappoio.domain.*;
 import com.giovannicarmo.webserviceappoio.domain.enums.*;
 import com.giovannicarmo.webserviceappoio.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -13,6 +14,8 @@ import java.util.Arrays;
 @Service
 public class DBService {
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -28,9 +31,9 @@ public class DBService {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        Usuario usuario1 = new Usuario(null, "Giovanni Carmo", "g@gmail.com", "12345",
+        Usuario usuario1 = new Usuario("Giovanni Carmo", "g@gmail.com", passwordEncoder.encode("12345"),
                 "(32) 32113269", "teste", TipoUsuario.DIRETOR);
-        Usuario usuario2 = new Usuario(null, "Reinaldo Luna", "r@gmail.com", "12345",
+        Usuario usuario2 = new Usuario("Reinaldo Luna", "r@gmail.com", passwordEncoder.encode("12345"),
                 "(32) 32113269", "teste", TipoUsuario.PAI);
 
         Crianca crianca1 = new Crianca(null, "Bruno Campos", "Jesuitas", "file/file.png",
