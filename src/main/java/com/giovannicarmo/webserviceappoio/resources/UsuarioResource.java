@@ -2,11 +2,10 @@ package com.giovannicarmo.webserviceappoio.resources;
 
 
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
-import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioDTO;
-import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioNewDTO;
+import com.giovannicarmo.webserviceappoio.dto.UsuarioDTO;
+import com.giovannicarmo.webserviceappoio.dto.UsuarioNewDTO;
 import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

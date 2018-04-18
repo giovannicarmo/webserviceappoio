@@ -1,10 +1,9 @@
 package com.giovannicarmo.webserviceappoio.resources;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
-import com.giovannicarmo.webserviceappoio.domain.dto.CriancaDTO;
+import com.giovannicarmo.webserviceappoio.dto.CriancaDTO;
 import com.giovannicarmo.webserviceappoio.services.CriancaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

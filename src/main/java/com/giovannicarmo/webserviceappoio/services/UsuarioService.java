@@ -1,15 +1,12 @@
 package com.giovannicarmo.webserviceappoio.services;
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
-import com.giovannicarmo.webserviceappoio.domain.dto.UsuarioNewDTO;
+import com.giovannicarmo.webserviceappoio.dto.UsuarioNewDTO;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
 import com.giovannicarmo.webserviceappoio.repositories.UsuarioRepository;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

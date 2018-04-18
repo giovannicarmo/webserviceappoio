@@ -1,4 +1,4 @@
-package com.giovannicarmo.webserviceappoio.domain.dto;
+package com.giovannicarmo.webserviceappoio.dto;
 
 import java.io.Serializable;
 
