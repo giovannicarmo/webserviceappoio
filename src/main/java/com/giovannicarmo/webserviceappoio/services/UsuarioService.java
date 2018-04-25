@@ -34,6 +34,7 @@ public class UsuarioService {
         return object;
     }
 
+    //cuidado
     public Usuario findByEmail(String email) {
         Usuario object = repository.findByEmail(email);
         if (object == null) {
