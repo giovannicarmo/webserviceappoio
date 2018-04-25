@@ -1,4 +1,5 @@
 package com.giovannicarmo.webserviceappoio.services;
+
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.dto.UsuarioNewDTO;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
@@ -21,14 +22,22 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public List<Usuario> findAll(){
+    public List<Usuario> findAll() {
         return repository.findAll();
     }
 
     public Usuario find(Integer id) {
         Usuario object = repository.findOne(id);
-        if(object == null) {
+        if (object == null) {
             throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Usuario.class.getName());
+        }
+        return object;
+    }
+
+    public Usuario findByEmail(String email) {
+        Usuario object = repository.findByEmail(email);
+        if (object == null) {
+            throw new ObjectNotFoundException("Objeto nao encontrado! Email: " + email + "Tipo: " + Usuario.class.getName());
         }
         return object;
     }
@@ -45,12 +54,12 @@ public class UsuarioService {
     }
 
     public void delete(Integer id) {
-       find(id);
-       try{
-           repository.delete(id);
-       } catch (DataIntegrityViolationException e){
-           throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
-       }
+        find(id);
+        try {
+            repository.delete(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
+        }
     }
 
     public Usuario fromDTO(UsuarioNewDTO objectDTO) {
