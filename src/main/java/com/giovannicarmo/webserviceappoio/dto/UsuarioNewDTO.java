@@ -1,9 +1,8 @@
 package com.giovannicarmo.webserviceappoio.dto;
 
-import com.giovannicarmo.webserviceappoio.domain.Usuario;
-import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -23,7 +22,6 @@ public class UsuarioNewDTO implements Serializable {
 
     private String foto;
 
-    @NotEmpty(message = "Campo Obrigatório!")
     private Integer tipo;
 
     public UsuarioNewDTO() {
