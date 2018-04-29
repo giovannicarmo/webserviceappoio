@@ -1,7 +1,7 @@
 package com.giovannicarmo.webserviceappoio.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.giovannicarmo.webserviceappoio.domain.dto.CredentialsDTO;
+import com.giovannicarmo.webserviceappoio.dto.CredentialsDTO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

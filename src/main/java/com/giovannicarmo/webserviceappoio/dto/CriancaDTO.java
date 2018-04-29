@@ -1,4 +1,4 @@
-package com.giovannicarmo.webserviceappoio.domain.dto;
+package com.giovannicarmo.webserviceappoio.dto;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
 
