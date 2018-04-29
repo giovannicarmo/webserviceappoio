@@ -24,7 +24,6 @@ public class UsuarioNewDTO implements Serializable {
 
     private String foto;
 
-    @NotEmpty(message = "Campo Obrigatório!")
     private Integer tipo;
 
     public UsuarioNewDTO() {
