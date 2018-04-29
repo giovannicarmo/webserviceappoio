@@ -35,6 +35,13 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(object);
     }
 
+    //cuidado
+    @RequestMapping(path = "/email", method = RequestMethod.GET)
+    public ResponseEntity<UsuarioDTO> find(@RequestParam(value = "value") String email){
+        Usuario obj = service.findByEmail(email);
+        return ResponseEntity.ok().body(new UsuarioDTO(obj));
+    }
+
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioNewDTO objectDTO) {
         Usuario object = service.fromDTO(objectDTO);
