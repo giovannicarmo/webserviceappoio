@@ -10,7 +10,7 @@ public enum TipoUsuario {
     COORDENADOR (6, "Coordenador"),
     DIRETOR (7, "Diretor"),
     PSICOLOGO (8, "Psicologo"),
-    PSICIATRA (9, "Psiciatra"),
+    PSICIATRA (9, "Psiquiatra"),
     PEDIATRA (10, "Pediatra");
 
     private int id;

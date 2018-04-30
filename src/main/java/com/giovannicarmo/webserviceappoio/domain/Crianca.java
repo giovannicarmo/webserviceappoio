@@ -30,7 +30,6 @@ public class Crianca implements Serializable {
     @OneToMany(mappedBy = "crianca")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "CRIANCA_USUARIO",
             joinColumns = @JoinColumn(name = "id_crianca"),

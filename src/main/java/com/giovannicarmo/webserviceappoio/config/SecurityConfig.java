@@ -46,6 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/usuarios/**",
             "/criancas/**"
     };
+    private static final String[] PUBLIC_MATCHERS_PUT = {
+            "/usuarios/**",
+            "/criancas/**"
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -56,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable();
         http.authorizeRequests()
+                .antMatchers(HttpMethod.PUT, PUBLIC_MATCHERS_PUT).permitAll()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
