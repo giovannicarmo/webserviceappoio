@@ -39,10 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-        "/usuarios/**"
+            "/usuarios/**",
+            "/criancas/**"
     };
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/usuarios/**"
+            "/usuarios/**",
+            "/criancas/**"
     };
 
     @Override

@@ -20,6 +20,13 @@ public class CriancaResource {
     @Autowired
     CriancaService service;
 
+    @RequestMapping(value = "/usuario", method = RequestMethod.GET)
+    public ResponseEntity<List<Crianca>> criancaUsuario (
+            @RequestParam(value = "id", defaultValue = "") Integer id_usuario) {
+        List<Crianca> list = service.criancaUsuario(id_usuario);
+        return ResponseEntity.ok().body(list);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<CriancaDTO>> findAll(){
         List<Crianca> list = service.findAll();

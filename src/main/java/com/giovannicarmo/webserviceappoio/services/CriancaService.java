@@ -19,6 +19,10 @@ public class CriancaService {
     @Autowired
     private CriancaRepository repository;
 
+    public List<Crianca> criancaUsuario(Integer id_usuario) {
+        return repository.criancaUsuario(id_usuario);
+    }
+
     public List<Crianca> findAll(){
         return repository.findAll();
     }

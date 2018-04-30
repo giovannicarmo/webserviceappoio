@@ -45,7 +45,7 @@ public class DBService {
         usuario2.getCriancas().addAll(Arrays.asList(crianca1, crianca2));
 
         crianca1.getUsuarios().addAll(Arrays.asList(usuario1, usuario2));
-        crianca2.getUsuarios().addAll(Arrays.asList(usuario1, usuario2));
+        crianca2.getUsuarios().addAll(Arrays.asList(usuario1));
 
         RecomendacaoMedica recomendacaoMedica1 = new RecomendacaoMedica(null, "Lorem ipsum dolor sit amet," +
                 "consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
