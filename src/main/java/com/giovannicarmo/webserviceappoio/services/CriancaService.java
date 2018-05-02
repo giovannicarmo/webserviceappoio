@@ -25,9 +25,6 @@ public class CriancaService {
     @Autowired
     private CriancaRepository repository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
     public List<Crianca> criancaUsuario(Integer id_usuario) {
         return repository.criancaUsuario(id_usuario);
     }
@@ -70,10 +67,9 @@ public class CriancaService {
     }
 
     public Crianca fromDTO (CriancaNewDTO objectDTO) {
-       // List<Usuario> usuarios = usuarioRepository.findAllByIdIn(objectDTO.getUsuariosID());
         Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(), objectDTO.getFoto(),
                 objectDTO.getDataNascimento(), Sexo.toEnum(objectDTO.getSexo()),
-                CategoriaTea.toEnum(objectDTO.getCategoriaTea())/*, usuarios*/);
+                CategoriaTea.toEnum(objectDTO.getCategoriaTea()));
         return object;
     }
 
