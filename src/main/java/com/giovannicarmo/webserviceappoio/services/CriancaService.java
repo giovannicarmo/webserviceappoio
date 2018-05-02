@@ -1,7 +1,12 @@
 package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
+import com.giovannicarmo.webserviceappoio.domain.Usuario;
+import com.giovannicarmo.webserviceappoio.domain.enums.CategoriaTea;
+import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
+import com.giovannicarmo.webserviceappoio.dto.CriancaNewDTO;
 import com.giovannicarmo.webserviceappoio.repositories.CriancaRepository;
+import com.giovannicarmo.webserviceappoio.repositories.UsuarioRepository;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +24,9 @@ public class CriancaService {
 
     @Autowired
     private CriancaRepository repository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public List<Crianca> criancaUsuario(Integer id_usuario) {
         return repository.criancaUsuario(id_usuario);
@@ -60,6 +69,14 @@ public class CriancaService {
         }
     }
 
+    public Crianca fromDTO (CriancaNewDTO objectDTO) {
+       // List<Usuario> usuarios = usuarioRepository.findAllByIdIn(objectDTO.getUsuariosID());
+        Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(), objectDTO.getFoto(),
+                objectDTO.getDataNascimento(), Sexo.toEnum(objectDTO.getSexo()),
+                CategoriaTea.toEnum(objectDTO.getCategoriaTea())/*, usuarios*/);
+        return object;
+    }
+
     private void updateData(Crianca newObject, Crianca object) {
         newObject.setNome(object.getNome());
         newObject.setColegio(object.getColegio());
@@ -67,5 +84,6 @@ public class CriancaService {
         newObject.setDataNascimento(object.getDataNascimento());
         newObject.setSexo(object.getSexo());
         newObject.setCategoriaTea(object.getCategoriaTea());
+        newObject.setUsuarios(object.getUsuarios());
     }
 }

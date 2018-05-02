@@ -43,14 +43,16 @@ public class Crianca implements Serializable {
 
     public Crianca(){}
 
-    public Crianca(Integer id, String nome, String colegio, String foto, Date dataNascimento, Sexo sexo, CategoriaTea categoriaTea) {
+    public Crianca(Integer id, String nome, String colegio, String foto, Date dataNascimento, Sexo sexo,
+                   CategoriaTea categoriaTea/*, List<Usuario> usuarios*/) {
         this.id = id;
         this.nome = nome;
         this.colegio = colegio;
         this.foto = foto;
         this.dataNascimento = dataNascimento;
-        this.sexo = sexo.getId();
-        this.categoriaTea = categoriaTea.getId();
+        this.sexo = (sexo == null) ? null : sexo.getId();
+        this.categoriaTea = (categoriaTea == null) ? null : categoriaTea.getId();
+        //this.usuarios = usuarios;
     }
 
     public Integer getId() {

@@ -56,10 +56,10 @@ public class Rotina implements Serializable {
         this.tipo = tipo.getId();
         this.atividades = atividades;
         this.obs = obs;
-        this.comportamento = comportamento.getId();
-        this.interacao = interacao.getId();
-        this.humor = humor.getId();
-        this.alimentacao = alimentacao.getId();
+        this.comportamento = (comportamento == null) ? null : comportamento.getId();
+        this.interacao = (interacao == null) ? null : interacao.getId();
+        this.humor = (humor == null) ? null : humor.getId();
+        this.alimentacao = (alimentacao == null) ? null : alimentacao.getId();
     }
 
     public Integer getId() {

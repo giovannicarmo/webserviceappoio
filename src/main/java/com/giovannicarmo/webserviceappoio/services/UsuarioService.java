@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class UsuarioService {
         return repository.save(object);
     }
 
+    @Transactional
     public Usuario update(Usuario object) {
         Usuario newObject = find(object.getId());
         updateData(newObject, object);
@@ -77,5 +79,6 @@ public class UsuarioService {
         newObject.setTelefone(object.getTelefone());
         newObject.setFoto(object.getFoto());
         newObject.setTipo(object.getTipo());
+        newObject.setCriancas(object.getCriancas());
     }
 }

@@ -2,8 +2,8 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum Sexo {
 
-    MASCULINO (1, "Masculino"),
-    FEMININO (2, "Feminino");
+    MASCULINO (0, "Masculino"),
+    FEMININO (1, "Feminino");
 
     private int id;
     private String descricao;

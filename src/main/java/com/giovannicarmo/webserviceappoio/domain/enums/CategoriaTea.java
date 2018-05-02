@@ -2,9 +2,9 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum CategoriaTea {
 
-    GRAVIDADE1 (1, "Gravidade 1"),
-    GRAVIDADE2 (2, "Gravidade 2"),
-    GRAVIDADE3 (3, "Gravidade 3");
+    GRAVIDADE1 (0, "Gravidade 1"),
+    GRAVIDADE2 (1, "Gravidade 2"),
+    GRAVIDADE3 (2, "Gravidade 3");
 
     private int id;
     private String descricao;

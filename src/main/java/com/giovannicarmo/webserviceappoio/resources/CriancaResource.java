@@ -1,8 +1,11 @@
 package com.giovannicarmo.webserviceappoio.resources;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
+import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.dto.CriancaDTO;
+import com.giovannicarmo.webserviceappoio.dto.CriancaNewDTO;
 import com.giovannicarmo.webserviceappoio.services.CriancaService;
+import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,9 @@ public class CriancaResource {
 
     @Autowired
     CriancaService service;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @RequestMapping(value = "/usuario", method = RequestMethod.GET)
     public ResponseEntity<List<Crianca>> criancaUsuario (
@@ -41,15 +47,17 @@ public class CriancaResource {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ResponseEntity<Crianca> save(@RequestBody Crianca object) {
+    public ResponseEntity<Crianca> save(@Valid @RequestBody CriancaNewDTO objectDTO, Usuario usuario) {
+        Crianca object = service.fromDTO(objectDTO);
         object = service.insert(object);
+        usuarioService.update(usuario);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(object.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Crianca> update(@Valid @RequestBody Crianca object, @PathVariable Integer id) {
+    public ResponseEntity<Crianca> update(@Valid @RequestBody Crianca object, Usuario usuario, @PathVariable Integer id) {
         object.setId(id);
         service.update(object);
         return ResponseEntity.noContent().build();
