@@ -42,11 +42,7 @@ public class Crianca implements Serializable {
 
     public Crianca(){}
 
-<<<<<<< HEAD
-    public Crianca(Integer id, String nome, String colegio, String foto, Date dataNascimento, Sexo sexo,
-=======
     public Crianca(Integer id, String nome, String colegio, Date dataNascimento, Sexo sexo,
->>>>>>> desenvolvimento
                    CategoriaTea categoriaTea) {
         this.id = id;
         this.nome = nome;

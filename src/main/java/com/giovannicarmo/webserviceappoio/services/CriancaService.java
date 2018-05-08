@@ -30,8 +30,6 @@ public class CriancaService {
     @Autowired
     private CriancaRepository repository;
 
-<<<<<<< HEAD
-=======
     @Autowired
     private S3Service s3Service;
 
@@ -44,7 +42,6 @@ public class CriancaService {
     @Value("${image.profile.size}")
     private Integer size;
 
->>>>>>> desenvolvimento
     public List<Crianca> criancaUsuario(Integer id_usuario) {
         return repository.criancaUsuario(id_usuario);
     }
@@ -82,12 +79,7 @@ public class CriancaService {
     }
 
     public Crianca fromDTO (CriancaNewDTO objectDTO) {
-<<<<<<< HEAD
-        Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(), objectDTO.getFoto(),
-=======
-
         Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(),
->>>>>>> desenvolvimento
                 objectDTO.getDataNascimento(), Sexo.toEnum(objectDTO.getSexo()),
                 CategoriaTea.toEnum(objectDTO.getCategoriaTea()));
         return object;
