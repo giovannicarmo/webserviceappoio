@@ -10,7 +10,6 @@ public class CriancaDTO implements Serializable {
     private Integer id;
     private String nome;
     private String colegio;
-    private String foto;
 
     public CriancaDTO() {
     }
@@ -19,7 +18,6 @@ public class CriancaDTO implements Serializable {
         id = object.getId();
         nome = object.getNome();
         colegio = object.getColegio();
-        foto = object.getFoto();
     }
 
     public Integer getId() {
@@ -44,13 +42,5 @@ public class CriancaDTO implements Serializable {
 
     public void setColegio(String colegio) {
         this.colegio = colegio;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 }

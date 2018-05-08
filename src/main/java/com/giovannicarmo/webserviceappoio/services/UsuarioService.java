@@ -35,7 +35,7 @@ public class UsuarioService {
     @Autowired
     private ImageService imageService;
 
-    @Value("${img.prefix.client.profile}")
+    @Value("${img.prefix.usuario.profile}")
     private String prefix;
 
     @Value("${image.profile.size}")

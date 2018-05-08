@@ -7,16 +7,21 @@ import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
 import com.giovannicarmo.webserviceappoio.dto.CriancaNewDTO;
 import com.giovannicarmo.webserviceappoio.repositories.CriancaRepository;
 import com.giovannicarmo.webserviceappoio.repositories.UsuarioRepository;
+import com.giovannicarmo.webserviceappoio.services.excepition.AuthorizationExcepition;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -26,7 +31,16 @@ public class CriancaService {
     private CriancaRepository repository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private S3Service s3Service;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Value("${img.prefix.crianca.profile}")
+    private String prefix;
+
+    @Value("${image.profile.size}")
+    private Integer size;
 
     public List<Crianca> criancaUsuario(Integer id_usuario) {
         return repository.criancaUsuario(id_usuario);
@@ -42,11 +56,6 @@ public class CriancaService {
             throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Crianca.class.getName());
         }
         return object;
-    }
-
-    public Page<Crianca> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
-        PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repository.findAll(pageRequest);
     }
 
     public Crianca insert(Crianca object) {
@@ -70,20 +79,35 @@ public class CriancaService {
     }
 
     public Crianca fromDTO (CriancaNewDTO objectDTO) {
-       // List<Usuario> usuarios = usuarioRepository.findAllByIdIn(objectDTO.getUsuariosID());
-        Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(), objectDTO.getFoto(),
+
+        Crianca object = new Crianca(null, objectDTO.getNome(), objectDTO.getColegio(),
                 objectDTO.getDataNascimento(), Sexo.toEnum(objectDTO.getSexo()),
-                CategoriaTea.toEnum(objectDTO.getCategoriaTea())/*, usuarios*/);
+                CategoriaTea.toEnum(objectDTO.getCategoriaTea()));
         return object;
     }
 
     private void updateData(Crianca newObject, Crianca object) {
         newObject.setNome(object.getNome());
         newObject.setColegio(object.getColegio());
-        newObject.setFoto(object.getFoto());
         newObject.setDataNascimento(object.getDataNascimento());
         newObject.setSexo(object.getSexo());
         newObject.setCategoriaTea(object.getCategoriaTea());
         newObject.setUsuarios(object.getUsuarios());
+    }
+
+    public URI uploadCriancaPicture(Integer id, MultipartFile multipartFile) {
+
+        Crianca object = repository.findOne(id);
+        if(object == null) {
+            throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Crianca.class.getName());
+        }
+
+        BufferedImage jpgImage = imageService.getJpjImageFromFile(multipartFile);
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, size);
+
+        String fileName = prefix + object.getId() + ".jpg";
+
+        return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
     }
 }

@@ -19,7 +19,6 @@ public class Crianca implements Serializable {
 
     private String nome;
     private String colegio;
-    private String foto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
@@ -43,16 +42,14 @@ public class Crianca implements Serializable {
 
     public Crianca(){}
 
-    public Crianca(Integer id, String nome, String colegio, String foto, Date dataNascimento, Sexo sexo,
-                   CategoriaTea categoriaTea/*, List<Usuario> usuarios*/) {
+    public Crianca(Integer id, String nome, String colegio, Date dataNascimento, Sexo sexo,
+                   CategoriaTea categoriaTea) {
         this.id = id;
         this.nome = nome;
         this.colegio = colegio;
-        this.foto = foto;
         this.dataNascimento = dataNascimento;
         this.sexo = (sexo == null) ? null : sexo.getId();
         this.categoriaTea = (categoriaTea == null) ? null : categoriaTea.getId();
-        //this.usuarios = usuarios;
     }
 
     public Integer getId() {
@@ -77,14 +74,6 @@ public class Crianca implements Serializable {
 
     public void setColegio(String colegio) {
         this.colegio = colegio;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public Date getDataNascimento() {

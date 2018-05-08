@@ -37,7 +37,7 @@ public class MensagemUsuarioService {
     public void delete(MensagemUsuario id) {
         find(id);
         try{
-            //repository.delete(id);
+            repository.delete(id);
         } catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
         }
