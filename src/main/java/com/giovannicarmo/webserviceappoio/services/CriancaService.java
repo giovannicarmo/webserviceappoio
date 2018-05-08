@@ -1,23 +1,16 @@
 package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
-import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.domain.enums.CategoriaTea;
 import com.giovannicarmo.webserviceappoio.domain.enums.Sexo;
 import com.giovannicarmo.webserviceappoio.dto.CriancaNewDTO;
 import com.giovannicarmo.webserviceappoio.repositories.CriancaRepository;
-import com.giovannicarmo.webserviceappoio.repositories.UsuarioRepository;
-import com.giovannicarmo.webserviceappoio.services.excepition.AuthorizationExcepition;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.image.BufferedImage;

@@ -2,7 +2,6 @@ package com.giovannicarmo.webserviceappoio.dto;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
