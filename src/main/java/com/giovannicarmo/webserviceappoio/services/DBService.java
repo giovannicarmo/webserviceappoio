@@ -37,9 +37,9 @@ public class DBService {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         Usuario usuario1 = new Usuario("Giovanni Carmo", "g@gmail.com", passwordEncoder.encode("12345"),
-                "(32) 32113269", "teste", TipoUsuario.DIRETOR);
+                "(32) 32113269", TipoUsuario.DIRETOR);
         Usuario usuario2 = new Usuario("Reinaldo Luna", "r@gmail.com", passwordEncoder.encode("12345"),
-                "(32) 32113269", "teste", TipoUsuario.PAI);
+                "(32) 32113269", TipoUsuario.PAI);
 
         //usuarios.add(usuario1);
         //usuarios.add(usuario2);

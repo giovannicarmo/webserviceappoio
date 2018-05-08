@@ -13,7 +13,6 @@ public class UsuarioDTO implements Serializable {
     private String nome;
     private String email;
     private String telefone;
-    private String foto;
     private TipoUsuario tipo;
 
     public UsuarioDTO() {
@@ -24,7 +23,6 @@ public class UsuarioDTO implements Serializable {
         nome = object.getNome();
         email = object.getEmail();
         telefone = object.getTelefone();
-        foto = object.getFoto();
         tipo = object.getTipo();
     }
 
@@ -58,14 +56,6 @@ public class UsuarioDTO implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public TipoUsuario getTipo() {
