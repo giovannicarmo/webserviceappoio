@@ -18,13 +18,14 @@ public class Usuario implements Serializable{
     private Integer id;
 
     private String nome;
+
+    @Column(unique = true)
     private String email;
 
     @JsonIgnore
     private String senha;
 
     private String telefone;
-    private String foto;
     private Integer tipo;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -53,13 +54,12 @@ public class Usuario implements Serializable{
 
     public Usuario(){ addProfile(Profile.CLIENT); }
 
-    public Usuario(String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
+    public Usuario(String nome, String email, String senha, String telefone, TipoUsuario tipo) {
 
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.foto = foto;
         this.tipo = (tipo == null) ? null : tipo.getId();
         addProfile(Profile.CLIENT);
     }
@@ -120,14 +120,6 @@ public class Usuario implements Serializable{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public TipoUsuario getTipo() {

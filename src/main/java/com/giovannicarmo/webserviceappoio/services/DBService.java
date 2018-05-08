@@ -34,14 +34,23 @@ public class DBService {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         Usuario usuario1 = new Usuario("Giovanni Carmo", "g@gmail.com", passwordEncoder.encode("12345"),
-                "(32) 32113269", "teste", TipoUsuario.DIRETOR);
+                "(32) 32113269", TipoUsuario.DIRETOR);
         Usuario usuario2 = new Usuario("Reinaldo Luna", "r@gmail.com", passwordEncoder.encode("12345"),
+<<<<<<< HEAD
                 "(32) 32113269", "teste", TipoUsuario.PAI);
 
         Crianca crianca1 = new Crianca(null, "Bruno Campos", "Jesuitas", "file/file.png",
                 sdf.parse("02/02/1982"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE1/*, usuarios*/);
         Crianca crianca2 = new Crianca(null, "Anderson Segunda", "Clorindo", "file/file.png",
                 sdf.parse("24/04/1984"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE3/*, usuarios*/);
+=======
+                "(32) 32113269", TipoUsuario.PAI);
+
+        Crianca crianca1 = new Crianca(null, "Bruno Campos", "Jesuitas",
+                sdf.parse("02/02/1982"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE1);
+        Crianca crianca2 = new Crianca(null, "Anderson Segunda", "Clorindo",
+                sdf.parse("24/04/1984"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE3);
+>>>>>>> desenvolvimento
 
         usuario1.getCriancas().addAll(Arrays.asList(crianca1, crianca2));
         usuario2.getCriancas().addAll(Arrays.asList(crianca1, crianca2));

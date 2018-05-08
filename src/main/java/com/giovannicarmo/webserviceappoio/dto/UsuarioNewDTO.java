@@ -20,8 +20,6 @@ public class UsuarioNewDTO implements Serializable {
 
     private String telefone;
 
-    private String foto;
-
     private Integer tipo;
 
     public UsuarioNewDTO() {
@@ -57,14 +55,6 @@ public class UsuarioNewDTO implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public Integer getTipo() {

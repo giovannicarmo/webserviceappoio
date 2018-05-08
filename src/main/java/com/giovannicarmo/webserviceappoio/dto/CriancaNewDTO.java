@@ -13,7 +13,6 @@ public class CriancaNewDTO implements Serializable {
     private String nome;
 
     private String colegio;
-    private String foto;
 
     @NotEmpty(message = "Campo Obrigatório!")
     private Date dataNascimento;
@@ -42,14 +41,6 @@ public class CriancaNewDTO implements Serializable {
 
     public void setColegio(String colegio) {
         this.colegio = colegio;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public Date getDataNascimento() {
