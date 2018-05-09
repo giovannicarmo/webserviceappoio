@@ -57,9 +57,7 @@ public class CriancaService {
     }
 
     public Crianca update(Crianca object) {
-        Crianca newObject = find(object.getId());
-        updateData(newObject, object);
-        return repository.save(newObject);
+        return repository.save(object );
     }
 
     public void delete(Integer id) {
@@ -78,14 +76,16 @@ public class CriancaService {
         return object;
     }
 
-    private void updateData(Crianca newObject, Crianca object) {
-        newObject.setNome(object.getNome());
-        newObject.setColegio(object.getColegio());
-        newObject.setDataNascimento(object.getDataNascimento());
-        newObject.setSexo(object.getSexo());
-        newObject.setCategoriaTea(object.getCategoriaTea());
-        newObject.setUsuarios(object.getUsuarios());
-    }
+//    private Crianca updateData(Crianca object) {
+//        Crianca newObject = find(object.getId());
+//        newObject.setNome(object.getNome());
+//        newObject.setColegio(object.getColegio());
+//        newObject.setDataNascimento(object.getDataNascimento());
+//        newObject.setSexo(object.getSexo());
+//        newObject.setCategoriaTea(object.getCategoriaTea());
+//        newObject.setUsuarios(object.getUsuarios());
+//        return newObject;
+//    }
 
     public URI uploadCriancaPicture(Integer id, MultipartFile multipartFile) {
 

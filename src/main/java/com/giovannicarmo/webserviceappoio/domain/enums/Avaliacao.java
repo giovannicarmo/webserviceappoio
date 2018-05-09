@@ -33,6 +33,7 @@ public enum Avaliacao {
 
     public static Avaliacao toEnum(Integer id) {
 
+
         if (id == null) {
             return null;
         }

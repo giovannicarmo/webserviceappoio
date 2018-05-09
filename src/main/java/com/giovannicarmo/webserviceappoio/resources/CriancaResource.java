@@ -58,7 +58,7 @@ public class CriancaResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Crianca> update(@Valid @RequestBody Crianca object, Usuario usuario, @PathVariable Integer id) {
+    public ResponseEntity<Crianca> update(@Valid @RequestBody Crianca object, @PathVariable Integer id) {
         object.setId(id);
         service.update(object);
         return ResponseEntity.noContent().build();

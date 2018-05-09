@@ -34,7 +34,7 @@ public class Crianca implements Serializable {
             joinColumns = @JoinColumn(name = "id_crianca"),
             inverseJoinColumns = @JoinColumn(name = "id_usuario")
     )
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Set<Usuario> usuarios = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "crianca")
@@ -108,11 +108,11 @@ public class Crianca implements Serializable {
         this.recomendacoesMedicas = recomendacoesMedicas;
     }
 
-    public List<Usuario> getUsuarios() {
+    public Set<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
+    public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 

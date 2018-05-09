@@ -69,9 +69,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario update(Usuario object) {
-        Usuario newObject = find(object.getId());
-        updateData(newObject, object);
-        return repository.save(newObject);
+        return repository.save(object);
     }
 
     public void delete(Integer id) {
@@ -90,14 +88,14 @@ public class UsuarioService {
         return usuario;
     }
 
-    private void updateData(Usuario newObject, Usuario object) {
-        newObject.setNome(object.getNome());
-        newObject.setEmail(object.getEmail());
-        newObject.setSenha(object.getSenha());
-        newObject.setTelefone(object.getTelefone());
-        newObject.setTipo(object.getTipo());
-        newObject.setCriancas(object.getCriancas());
-    }
+//    private void updateData(Usuario newObject, Usuario object) {
+//        newObject.setNome(object.getNome());
+//        newObject.setEmail(object.getEmail());
+//        newObject.setSenha(object.getSenha());
+//        newObject.setTelefone(object.getTelefone());
+//        newObject.setTipo(object.getTipo());
+//        newObject.setCriancas(object.getCriancas());
+//    }
 
     public URI uploadProfilePicture(MultipartFile multipartFile) {
 

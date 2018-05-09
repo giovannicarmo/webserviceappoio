@@ -26,13 +26,13 @@ public class RotinaResource {
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<Rotina>> findPage(
-            @RequestParam(value = "id_crianca", defaultValue = "") Integer id,
+            @RequestParam(value = "nome_crianca", defaultValue = "") String nome,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
             @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction
     ) {
-        Page<Rotina> list = service.search(id, page, linesPerPage, direction, orderBy);
+        Page<Rotina> list = service.search(nome, page, linesPerPage, direction, orderBy);
         return ResponseEntity.ok().body(list);
     }
 

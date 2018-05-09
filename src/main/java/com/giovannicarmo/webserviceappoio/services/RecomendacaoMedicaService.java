@@ -34,9 +34,7 @@ public class RecomendacaoMedicaService {
     }
 
     public RecomendacaoMedica update(RecomendacaoMedica object) {
-        RecomendacaoMedica newObject = find(object.getId());
-        updateData(newObject, object);
-        return repository.save(newObject);
+        return repository.save(object);
     }
 
     public void delete(Integer id) {
@@ -48,7 +46,8 @@ public class RecomendacaoMedicaService {
         }
     }
 
-    private void updateData(RecomendacaoMedica newObject, RecomendacaoMedica object) {
-       newObject.setObservacao(object.getObservacao());
-    }
+//    private void updateData(RecomendacaoMedica object) {
+//       RecomendacaoMedica newObject = find(object.getId());
+//       newObject.setObservacao(object.getObservacao());
+//    }
 }

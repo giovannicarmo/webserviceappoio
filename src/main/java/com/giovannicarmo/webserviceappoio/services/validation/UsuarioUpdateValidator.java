@@ -28,7 +28,6 @@ public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate
     @Override
     public boolean isValid(UsuarioDTO objectDto, ConstraintValidatorContext context) {
 
-        @SuppressWarnings("unchecked")
         Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Integer uriId = Integer.parseInt(map.get("id"));
 
