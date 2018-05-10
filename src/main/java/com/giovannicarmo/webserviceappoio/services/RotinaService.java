@@ -2,6 +2,7 @@ package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Rotina;
 import com.giovannicarmo.webserviceappoio.repositories.RotinaRepository;
+import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,15 @@ public class RotinaService {
     public Page<Rotina> search(String nomeCrianca, Integer page, Integer linesPerPage, String direction, String orderBy) {
         PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.search(nomeCrianca, pageRequest);
+    }
+
+    public Rotina find(Integer id) {
+        Rotina object = repository.findOne(id);
+        if(object == null) {
+            throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Rotina.class.getName());
+
+        }
+        return object;
     }
 
     public Rotina insert(Rotina object) {

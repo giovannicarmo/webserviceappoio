@@ -24,6 +24,12 @@ public class RotinaResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @RequestMapping(value= "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Rotina> find(@PathVariable Integer id) {
+        Rotina object = service.find(id);
+        return ResponseEntity.ok().body(object);
+    }
+
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<Rotina>> findPage(
             @RequestParam(value = "nome_crianca", defaultValue = "") String nome,
