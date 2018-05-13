@@ -18,6 +18,12 @@ public class RotinaResource {
     @Autowired
     RotinaService service;
 
+    @RequestMapping(value= "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Rotina> find(@PathVariable Integer id) {
+        Rotina object = service.find(id);
+        return ResponseEntity.ok().body(object);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAll(){
         List<Rotina> list = service.findAll();
