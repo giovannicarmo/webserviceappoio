@@ -2,8 +2,8 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum TipoRotina {
 
-    CASA (1, "Casa"),
-    ESCOLA (2, "Escola");
+    CASA (0, "Casa"),
+    ESCOLA (1, "Escola");
 
     private int id;
     private String descricao;

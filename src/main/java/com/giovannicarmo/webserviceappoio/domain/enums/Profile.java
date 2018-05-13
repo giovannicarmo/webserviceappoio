@@ -2,8 +2,8 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum Profile {
 
-    ADIMIN (1, "ROLE_ADMIN"),
-    CLIENT (2, "ROLE_CLIENT");
+    ADIMIN (0, "ROLE_ADMIN"),
+    CLIENT (1, "ROLE_CLIENT");
 
     private int id;
     private String description;

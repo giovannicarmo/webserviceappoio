@@ -2,15 +2,20 @@ package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
 import com.giovannicarmo.webserviceappoio.repositories.CriancaRepository;
+import com.giovannicarmo.webserviceappoio.services.excepition.AuthorizationExcepition;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -18,6 +23,18 @@ public class CriancaService {
 
     @Autowired
     private CriancaRepository repository;
+
+    @Autowired
+    private S3Service s3Service;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Value("${img.prefix.crianca.profile}")
+    private String prefix;
+
+    @Value("${image.profile.size}")
+    private Integer size;
 
     public List<Crianca> findAll(){
         return repository.findAll();
@@ -42,9 +59,7 @@ public class CriancaService {
     }
 
     public Crianca update(Crianca object) {
-        Crianca newObject = find(object.getId());
-        updateData(newObject, object);
-        return repository.save(newObject);
+        return repository.save(object);
     }
 
     public void delete(Integer id) {
@@ -56,12 +71,19 @@ public class CriancaService {
         }
     }
 
-    private void updateData(Crianca newObject, Crianca object) {
-        newObject.setNome(object.getNome());
-        newObject.setColegio(object.getColegio());
-        newObject.setFoto(object.getFoto());
-        newObject.setDataNascimento(object.getDataNascimento());
-        newObject.setSexo(object.getSexo());
-        newObject.setCategoriaTea(object.getCategoriaTea());
+    public URI uploadPicture(Integer id, MultipartFile multipartFile) {
+
+        Crianca object = repository.findOne(id);
+            if(object == null) {
+                throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Crianca.class.getName());
+            }
+
+        BufferedImage jpgImage = imageService.getJpjImageFromFile(multipartFile);
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, size);
+
+        String fileName = prefix + object.getId() + ".jpg";
+
+        return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
     }
 }

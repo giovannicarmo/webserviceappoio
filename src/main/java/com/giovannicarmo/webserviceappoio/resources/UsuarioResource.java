@@ -8,6 +8,7 @@ import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -35,6 +36,12 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(object);
     }
 
+    @RequestMapping(path = "/email", method = RequestMethod.GET)
+    public ResponseEntity<UsuarioDTO> find(@RequestParam(value = "value") String email){
+        Usuario obj = service.findByEmail(email);
+        return ResponseEntity.ok().body(new UsuarioDTO(obj));
+    }
+
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioNewDTO objectDTO) {
         Usuario object = service.fromDTO(objectDTO);
@@ -55,5 +62,12 @@ public class UsuarioResource {
     public ResponseEntity<Usuario> delete(@PathVariable Integer id){
        service.delete(id);
        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/picture", method = RequestMethod.POST)
+    public ResponseEntity<Void> uploadProfilePicture (@RequestParam(name="file") MultipartFile file) {
+
+        URI uri = service.uploadProfilePicture(file);
+        return ResponseEntity.created(uri).build();
     }
 }

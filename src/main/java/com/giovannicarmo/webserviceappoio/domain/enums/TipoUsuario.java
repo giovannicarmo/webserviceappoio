@@ -2,16 +2,16 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum TipoUsuario {
 
-    PAI (1, "Pai"),
-    MAE (2, "Mae"),
-    RESPONSAVEL (3, "Responsavel"),
-    PROFESSOR (4, "Professor"),
-    MEDIADOR (5, "Mediador"),
-    COORDENADOR (6, "Coordenador"),
-    DIRETOR (7, "Diretor"),
-    PSICOLOGO (8, "Psicologo"),
-    PSICIATRA (9, "Psiciatra"),
-    PEDIATRA (10, "Pediatra");
+    PAI (0, "Pai"),
+    MAE (1, "Mae"),
+    RESPONSAVEL (2, "Responsavel"),
+    PROFESSOR (3, "Professor"),
+    MEDIADOR (4, "Mediador"),
+    COORDENADOR (5, "Coordenador"),
+    DIRETOR (6, "Diretor"),
+    PSICOLOGO (7, "Psicologo"),
+    PSICIATRA (8, "Psiciatra"),
+    PEDIATRA (9, "Pediatra");
 
     private int id;
     private String descricao;

@@ -2,10 +2,10 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum Avaliacao {
 
-    RUIM (1, "Ruim"),
-    REGULAR (2, "Regular"),
-    BOM (3, "Bom"),
-    OTIMO (4, "Otimo");
+    RUIM (0, "Ruim"),
+    REGULAR (1, "Regular"),
+    BOM (2, "Bom"),
+    OTIMO (3, "Otimo");
 
     private int id;
     private String descricao;

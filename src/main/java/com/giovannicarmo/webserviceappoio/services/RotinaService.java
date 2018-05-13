@@ -2,7 +2,10 @@ package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Rotina;
 import com.giovannicarmo.webserviceappoio.repositories.RotinaRepository;
+import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
+import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,6 +23,14 @@ public class RotinaService {
         return repository.findAll();
     }
 
+    public Rotina find(Integer id) {
+        Rotina object = repository.findOne(id);
+        if(object == null) {
+            throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Rotina.class.getName());
+        }
+        return object;
+    }
+
     public Page<Rotina> search(Integer criancaId, Integer page, Integer linesPerPage, String direction, String orderBy) {
         PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.search(criancaId, pageRequest);
@@ -29,14 +40,12 @@ public class RotinaService {
         return repository.save(object);
     }
 
-    private void updateData(Rotina newObject, Rotina object) {
-        newObject.setData(object.getData());
-        newObject.setTipo(object.getTipo());
-        newObject.setAtividades(object.getAtividades());
-        newObject.setObs(object.getObs());
-        newObject.setComportamento(object.getComportamento());
-        newObject.setInteracao(object.getInteracao());
-        newObject.setHumor(object.getHumor());
-        newObject.setAlimentacao(object.getAlimentacao());
+    public void delete(Integer id) {
+        find(id);
+        try{
+            repository.delete(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
+        }
     }
 }

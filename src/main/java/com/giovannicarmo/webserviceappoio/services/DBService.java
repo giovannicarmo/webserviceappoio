@@ -36,9 +36,9 @@ public class DBService {
         Usuario usuario2 = new Usuario("Reinaldo Luna", "r@gmail.com", passwordEncoder.encode("12345"),
                 "(32) 32113269", "teste", TipoUsuario.PAI);
 
-        Crianca crianca1 = new Crianca(null, "Bruno Campos", "Jesuitas", "file/file.png",
+        Crianca crianca1 = new Crianca(null, "Bruno Campos", "Jesuitas",
                 sdf.parse("02/02/1982"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE1);
-        Crianca crianca2 = new Crianca(null, "Anderson Segunda", "Clorindo", "file/file.png",
+        Crianca crianca2 = new Crianca(null, "Anderson Segunda", "Clorindo",
                 sdf.parse("24/04/1984"), Sexo.MASCULINO, CategoriaTea.GRAVIDADE3);
 
         usuario1.getCriancas().addAll(Arrays.asList(crianca1, crianca2));
