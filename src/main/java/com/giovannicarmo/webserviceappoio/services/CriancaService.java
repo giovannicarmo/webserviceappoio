@@ -48,9 +48,13 @@ public class CriancaService {
         return object;
     }
 
-    public Page<Crianca> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
-        PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repository.findAll(pageRequest);
+    public List<Crianca> findByUsuario(Integer id) {
+        List <Crianca> object = repository.findCriancaByUsuario(id);
+        if(object == null) {
+            throw new ObjectNotFoundException("Usuário inexistente ou não vinculado com nenhuma criança!");
+        }
+
+        return object;
     }
 
     public Crianca insert(Crianca object) {

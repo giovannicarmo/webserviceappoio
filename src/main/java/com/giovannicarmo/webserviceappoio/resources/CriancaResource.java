@@ -34,6 +34,12 @@ public class CriancaResource {
         return ResponseEntity.ok().body(object);
     }
 
+    @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Crianca>> findByUsuarios(@PathVariable Integer id){
+        List<Crianca> list = service.findByUsuario(id);
+        return ResponseEntity.ok().body(list);
+    }
+
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public ResponseEntity<Crianca> save(@RequestBody Crianca object) {
         object = service.insert(object);
