@@ -31,9 +31,9 @@ public class RotinaService {
         return object;
     }
 
-    public Page<Rotina> search(Integer criancaId, Integer page, Integer linesPerPage, String direction, String orderBy) {
+    public Page<Rotina> search(String nome, Integer page, Integer linesPerPage, String direction, String orderBy) {
         PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repository.search(criancaId, pageRequest);
+        return repository.search(nome, pageRequest);
     }
 
     public Rotina insert(Rotina object) {

@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface RotinaRepository extends JpaRepository<Rotina, Integer> {
 
-    @Query("SELECT obj FROM Rotina obj WHERE obj.crianca.id = :id_crianca")
-    Page<Rotina> search(@Param("id_crianca") Integer criancaId, Pageable pageRequest);
+    @Query("SELECT obj FROM Rotina obj WHERE obj.crianca.nome = :nome_crianca")
+    Page<Rotina> search(@Param("nome_crianca") String nome, Pageable pageRequest);
 }
