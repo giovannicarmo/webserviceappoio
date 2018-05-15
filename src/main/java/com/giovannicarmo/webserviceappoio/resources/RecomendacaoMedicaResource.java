@@ -20,9 +20,9 @@ public class RecomendacaoMedicaResource {
     @Autowired
     RecomendacaoMedicaService service;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<RecomendacaoMedica>> findAll(){
-        List<RecomendacaoMedica> list = service.findAll();
+    @RequestMapping(value = "crianca/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<RecomendacaoMedica>> findAllByCrianca(@PathVariable Integer id){
+        List<RecomendacaoMedica> list = service.findAllByCrianca(id);
         return ResponseEntity.ok().body(list);
     }
 

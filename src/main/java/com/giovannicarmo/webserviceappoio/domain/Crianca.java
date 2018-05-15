@@ -26,6 +26,7 @@ public class Crianca implements Serializable {
     private Integer sexo;
     private Integer categoriaTea;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "crianca")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 

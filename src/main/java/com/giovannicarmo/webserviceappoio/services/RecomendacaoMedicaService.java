@@ -16,8 +16,8 @@ public class RecomendacaoMedicaService {
     @Autowired
     private RecomendacaoMedicaRepository repository;
 
-    public List<RecomendacaoMedica> findAll(){
-        return repository.findAll();
+    public List<RecomendacaoMedica> findAllByCrianca(Integer id){
+        return repository.findAllByCrianca(id);
     }
 
     public RecomendacaoMedica find(Integer id) {

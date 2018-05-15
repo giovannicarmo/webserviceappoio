@@ -68,7 +68,6 @@ public class Rotina implements Serializable {
 
     public void setId(Integer id) { this.id = id; }
 
-    @JsonIgnore
     public Usuario getUsuario() {
         return usuario;
     }
