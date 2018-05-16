@@ -53,13 +53,12 @@ public class Usuario implements Serializable{
 
     public Usuario(){ addProfile(Profile.CLIENT); }
 
-    public Usuario(String nome, String email, String senha, String telefone, String foto, TipoUsuario tipo) {
+    public Usuario(String nome, String email, String senha, String telefone, TipoUsuario tipo) {
 
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.foto = foto;
         this.tipo = (tipo == null) ? null : tipo.getId();
         addProfile(Profile.CLIENT);
     }

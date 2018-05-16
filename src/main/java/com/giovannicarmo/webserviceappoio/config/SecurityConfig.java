@@ -38,13 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/h2-console/**"
     };
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/criancas/**"
     };
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/rotinas/**"
+            "/usuarios/**"
     };
     private static final String[] PUBLIC_MATCHERS_PUT = {
-            "/rotinas/**"
     };
 
     @Override

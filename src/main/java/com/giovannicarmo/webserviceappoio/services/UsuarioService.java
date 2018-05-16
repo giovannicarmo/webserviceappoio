@@ -80,7 +80,7 @@ public class UsuarioService {
     public Usuario fromDTO(UsuarioNewDTO objectDTO) {
         Usuario usuario = new Usuario(objectDTO.getNome(), objectDTO.getEmail(),
                 passwordEncoder.encode(objectDTO.getSenha()), objectDTO.getTelefone(),
-                objectDTO.getFoto(), TipoUsuario.toEnum(objectDTO.getTipo()));
+                TipoUsuario.toEnum(objectDTO.getTipo()));
         return usuario;
     }
 
