@@ -1,5 +1,6 @@
 package com.giovannicarmo.webserviceappoio.security;
 
+import com.giovannicarmo.webserviceappoio.domain.enums.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +19,12 @@ public class UserSS implements UserDetails {
 
     public UserSS(){}
 
-    public UserSS(Integer id, String email, String password) {
+    public UserSS(Integer id, String email, String password, Set<Profile> profile) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.authorities = profile.stream().map(x -> new SimpleGrantedAuthority(x.getDescription()))
+                .collect(Collectors.toList());
     }
 
     public Integer getId(){
