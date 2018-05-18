@@ -1,7 +1,6 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.giovannicarmo.webserviceappoio.domain.enums.Profile;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
 
 import javax.persistence.*;
@@ -51,8 +50,6 @@ public class Usuario implements Serializable{
     @OneToMany(mappedBy = "usuarioReceptor")
     private Set<MensagemUsuario> usuariosReceptor = new HashSet<>();
 
-    public Usuario(){ addProfile(Profile.CLIENT); }
-
     public Usuario(String nome, String email, String senha, String telefone, TipoUsuario tipo) {
 
         this.nome = nome;
@@ -60,7 +57,6 @@ public class Usuario implements Serializable{
         this.senha = senha;
         this.telefone = telefone;
         this.tipo = (tipo == null) ? null : tipo.getId();
-        addProfile(Profile.CLIENT);
     }
 
     @JsonIgnore
@@ -135,14 +131,6 @@ public class Usuario implements Serializable{
 
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo.getId();
-    }
-
-    public Set<Profile> getProfiles() {
-        return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
-    }
-
-    public void addProfile(Profile profile) {
-        profiles.add(profile.getId());
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {
