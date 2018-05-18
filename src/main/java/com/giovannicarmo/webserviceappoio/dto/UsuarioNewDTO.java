@@ -22,7 +22,7 @@ public class UsuarioNewDTO implements Serializable {
 
     private String foto;
 
-    private Integer tipo;
+    private String tipo;
 
     public UsuarioNewDTO() {
     }
@@ -67,11 +67,11 @@ public class UsuarioNewDTO implements Serializable {
         this.foto = foto;
     }
 
-    public Integer getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

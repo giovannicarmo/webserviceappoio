@@ -2,46 +2,36 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum Profile {
 
-    ADIMIN (0, "ROLE_ADMIN"),
-    CLIENT (1, "ROLE_CLIENT");
+    ADIMIN ("ROLE_ADMIN"),
+    CLIENT ("ROLE_CLIENT");
+    
+    private String descricao;
 
-    private int id;
-    private String description;
-
-    Profile(int id, String description) {
-        this.id = id;
-        this.description = description;
+    Profile(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getId() {
-        return id;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public static Profile toEnum(String descricao) {
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public static Profile toEnum(Integer id) {
-
-        if (id == null) {
+        if (descricao == null) {
             return null;
         }
 
         for (Profile x : Profile.values()) {
 
-            if (id.equals(x.getId())) {
+            if (descricao.equals(x.getDescricao())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Id Inválido: " + id);
+        throw new IllegalArgumentException("Tipo inválido: " + descricao);
     }
 }

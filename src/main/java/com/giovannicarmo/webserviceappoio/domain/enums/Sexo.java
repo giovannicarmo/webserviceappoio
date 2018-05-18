@@ -2,23 +2,13 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum Sexo {
 
-    MASCULINO (0, "Masculino"),
-    FEMININO (1, "Feminino");
+    MASCULINO ("Masculino"),
+    FEMININO ("Feminino");
 
-    private int id;
     private String descricao;
 
-    Sexo(int id, String descricao) {
-        this.id = id;
+    Sexo(String descricao) {
         this.descricao = descricao;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescricao() {
@@ -29,19 +19,19 @@ public enum Sexo {
         this.descricao = descricao;
     }
 
-    public static Sexo toEnum(Integer id) {
+    public static Sexo toEnum(String descricao) {
 
-        if (id == null) {
+        if (descricao == null) {
             return null;
         }
 
         for (Sexo x : Sexo.values()) {
 
-            if (id.equals(x.getId())) {
+            if (descricao.equals(x.getDescricao())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Id invalido: " + id);
+        throw new IllegalArgumentException("Tipo inválido: " + descricao);
     }
 }

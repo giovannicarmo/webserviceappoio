@@ -38,11 +38,11 @@ public class Rotina implements Serializable {
     @Column(length = 2000)
     private String obs;
 
-    private Integer tipo;
-    private Integer comportamento;
-    private Integer interacao;
-    private Integer humor;
-    private Integer alimentacao;
+    private String tipo;
+    private String comportamento;
+    private String interacao;
+    private String humor;
+    private String alimentacao;
 
     public Rotina() {
     }
@@ -53,13 +53,13 @@ public class Rotina implements Serializable {
         this.crianca = (crianca);
         this.dataCriacao = dataCriacao;
         this.data = data;
-        this.tipo = tipo.getId();
+        this.tipo = tipo.getDescricao();
         this.atividades = atividades;
         this.obs = obs;
-        this.comportamento = comportamento.getId();
-        this.interacao = interacao.getId();
-        this.humor = humor.getId();
-        this.alimentacao = alimentacao.getId();
+        this.comportamento = comportamento.getDescricao();
+        this.interacao = interacao.getDescricao();
+        this.humor = humor.getDescricao();
+        this.alimentacao = alimentacao.getDescricao();
     }
 
     public Integer getId() {
@@ -121,7 +121,7 @@ public class Rotina implements Serializable {
     }
 
     public void setTipo(TipoRotina tipo) {
-        this.tipo = tipo.getId();
+        this.tipo = tipo.getDescricao();
     }
 
     public Avaliacao getComportamento() {
@@ -129,7 +129,7 @@ public class Rotina implements Serializable {
     }
 
     public void setComportamento(Avaliacao comportamento) {
-        this.comportamento = comportamento.getId();
+        this.comportamento = comportamento.getDescricao();
     }
 
     public Avaliacao getInteracao() {
@@ -137,7 +137,7 @@ public class Rotina implements Serializable {
     }
 
     public void setInteracao(Avaliacao interacao) {
-        this.interacao = interacao.getId();
+        this.interacao = interacao.getDescricao();
     }
 
     public Avaliacao getHumor() {
@@ -145,7 +145,7 @@ public class Rotina implements Serializable {
     }
 
     public void setHumor(Avaliacao humor) {
-        this.humor = humor.getId();
+        this.humor = humor.getDescricao();
     }
 
     public Avaliacao getAlimentacao() {
@@ -153,7 +153,7 @@ public class Rotina implements Serializable {
     }
 
     public void setAlimentacao(Avaliacao alimentacao) {
-        this.alimentacao = alimentacao.getId();
+        this.alimentacao = alimentacao.getDescricao();
     }
 
     @Override

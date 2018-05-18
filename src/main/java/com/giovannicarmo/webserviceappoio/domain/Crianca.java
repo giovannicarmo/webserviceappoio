@@ -23,10 +23,9 @@ public class Crianca implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
-    private Integer sexo;
-    private Integer categoriaTea;
+    private String sexo;
+    private String categoriaTea;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "crianca")
     private List<RecomendacaoMedica> recomendacoesMedicas = new ArrayList<>();
 
@@ -48,8 +47,8 @@ public class Crianca implements Serializable {
         this.nome = nome;
         this.colegio = colegio;
         this.dataNascimento = dataNascimento;
-        this.sexo = sexo.getId();
-        this.categoriaTea = categoriaTea.getId();
+        this.sexo = sexo.getDescricao();
+        this.categoriaTea = categoriaTea.getDescricao();
     }
 
     public Integer getId() {
@@ -89,7 +88,7 @@ public class Crianca implements Serializable {
     }
 
     public void setSexo(Sexo sexo) {
-        this.sexo = sexo.getId();
+        this.sexo = sexo.getDescricao();
     }
 
     public CategoriaTea getCategoriaTea() {
@@ -97,7 +96,7 @@ public class Crianca implements Serializable {
     }
 
     public void setCategoriaTea(CategoriaTea categoriaTea) {
-        this.categoriaTea = categoriaTea.getId();
+        this.categoriaTea = categoriaTea.getDescricao();
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {

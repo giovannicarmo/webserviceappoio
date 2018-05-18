@@ -25,11 +25,11 @@ public class Usuario implements Serializable{
 
     private String telefone;
     private String foto;
-    private Integer tipo;
+    private String tipo;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="PERFIS")
-    private Set<Integer> profiles = new HashSet<>();
+    private Set<String> profiles = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
@@ -59,7 +59,7 @@ public class Usuario implements Serializable{
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.tipo = (tipo == null) ? null : tipo.getId();
+        this.tipo = (tipo == null) ? null : tipo.getDescricao();
         addProfile(Profile.CLIENT);
     }
 
@@ -134,7 +134,7 @@ public class Usuario implements Serializable{
     }
 
     public void setTipo(TipoUsuario tipo) {
-        this.tipo = tipo.getId();
+        this.tipo = tipo.getDescricao();
     }
 
     public Set<Profile> getProfiles() {
@@ -142,7 +142,7 @@ public class Usuario implements Serializable{
     }
 
     public void addProfile(Profile profile) {
-        profiles.add(profile.getId());
+        profiles.add(profile.getDescricao());
     }
 
     public List<RecomendacaoMedica> getRecomendacoesMedicas() {

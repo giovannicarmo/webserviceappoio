@@ -2,23 +2,13 @@ package com.giovannicarmo.webserviceappoio.domain.enums;
 
 public enum TipoRotina {
 
-    CASA (0, "Casa"),
-    ESCOLA (1, "Escola");
+    CASA ("Casa"),
+    ESCOLA ("Escola");
 
-    private int id;
     private String descricao;
 
-    TipoRotina(int id, String descricao) {
-        this.id = id;
+    TipoRotina(String descricao) {
         this.descricao = descricao;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescricao() {
@@ -29,19 +19,19 @@ public enum TipoRotina {
         this.descricao = descricao;
     }
 
-    public static TipoRotina toEnum(Integer id) {
+    public static TipoRotina toEnum(String descricao) {
 
-        if (id == null) {
+        if (descricao == null) {
             return null;
         }
 
         for (TipoRotina x : TipoRotina.values()) {
 
-            if (id.equals(x.getId())) {
+            if (descricao.equals(x.getDescricao())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Id invalido: " + id);
+        throw new IllegalArgumentException("Tipo inválido: " + descricao);
     }
 }
