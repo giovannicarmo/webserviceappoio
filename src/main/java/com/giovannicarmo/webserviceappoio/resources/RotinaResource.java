@@ -49,4 +49,16 @@ public class RotinaResource {
                 .buildAndExpand(object.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Rotina> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(path = "crianca/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAllByCrianca(@PathVariable Integer id){
+        service.deleteAllByCrianca(id);
+        return ResponseEntity.noContent().build();
+    }
 }

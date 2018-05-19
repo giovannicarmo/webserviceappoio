@@ -17,12 +17,10 @@ public class RecomendacaoMedica implements Serializable {
     @Column(length = 2000)
     private String observacao;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_crianca")
     private Crianca crianca;

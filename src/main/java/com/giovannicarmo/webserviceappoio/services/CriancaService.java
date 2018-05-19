@@ -2,15 +2,11 @@ package com.giovannicarmo.webserviceappoio.services;
 
 import com.giovannicarmo.webserviceappoio.domain.Crianca;
 import com.giovannicarmo.webserviceappoio.repositories.CriancaRepository;
-import com.giovannicarmo.webserviceappoio.services.excepition.AuthorizationExcepition;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
 import com.giovannicarmo.webserviceappoio.services.excepition.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

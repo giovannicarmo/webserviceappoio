@@ -13,5 +13,4 @@ public interface RecomendacaoMedicaRepository extends JpaRepository<Recomendacao
     @Transactional(readOnly = true)
     @Query("SELECT obj FROM RecomendacaoMedica obj JOIN obj.crianca c ON c.id = :id_crianca")
     List<RecomendacaoMedica> findAllByCrianca(@Param("id_crianca") Integer id);
-
 }

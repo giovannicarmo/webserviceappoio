@@ -1,7 +1,6 @@
 package com.giovannicarmo.webserviceappoio.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.giovannicarmo.webserviceappoio.domain.enums.Avaliacao;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoRotina;
 

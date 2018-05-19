@@ -1,5 +1,6 @@
 package com.giovannicarmo.webserviceappoio.services;
 
+import com.giovannicarmo.webserviceappoio.domain.Crianca;
 import com.giovannicarmo.webserviceappoio.domain.Rotina;
 import com.giovannicarmo.webserviceappoio.repositories.RotinaRepository;
 import com.giovannicarmo.webserviceappoio.services.excepition.DataIntegrityException;
@@ -19,6 +20,9 @@ public class RotinaService {
     @Autowired
     private RotinaRepository repository;
 
+    @Autowired
+    private CriancaService criancaService;
+
     public List<Rotina> findAll(){
         return repository.findAll();
     }
@@ -26,7 +30,7 @@ public class RotinaService {
     public Rotina find(Integer id) {
         Rotina object = repository.findOne(id);
         if(object == null) {
-            throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + "Tipo: " + Rotina.class.getName());
+            throw new ObjectNotFoundException("Objeto nao encontrado! Id: " + id + " Tipo: " + Rotina.class.getName());
         }
         return object;
     }
@@ -42,10 +46,15 @@ public class RotinaService {
 
     public void delete(Integer id) {
         find(id);
-        try{
+        try {
             repository.delete(id);
         } catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Nao pode ser excluido pois esta relacionado com outras entidades");
         }
+    }
+
+    public void deleteAllByCrianca(Integer id) {
+        Crianca crianca = criancaService.find(id);
+        repository.deleteAllByCrianca(crianca);
     }
 }
