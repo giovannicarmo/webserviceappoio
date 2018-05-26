@@ -10,7 +10,7 @@ public enum TipoUsuario {
     COORDENADOR ("Coordenador"),
     DIRETOR ("Diretor"),
     PSICOLOGO ("Psicologo"),
-    PSICIATRA ("Psiciatra"),
+    PSICIATRA ("Psiquiatra"),
     PEDIATRA ("Pediatra");
 
     private String descricao;

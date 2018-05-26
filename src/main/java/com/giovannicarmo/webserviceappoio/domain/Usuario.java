@@ -18,6 +18,8 @@ public class Usuario implements Serializable{
     private Integer id;
 
     private String nome;
+
+    @Column(unique=true)
     private String email;
 
     @JsonIgnore
