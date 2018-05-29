@@ -4,6 +4,7 @@ package com.giovannicarmo.webserviceappoio.resources;
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.dto.UsuarioDTO;
 import com.giovannicarmo.webserviceappoio.dto.UsuarioNewDTO;
+import com.giovannicarmo.webserviceappoio.dto.UsuarioUpdateDTO;
 import com.giovannicarmo.webserviceappoio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +53,8 @@ public class UsuarioResource {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario object, @PathVariable Integer id) {
-        object.setId(id);
+    public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioUpdateDTO objectDTO, @PathVariable Integer id) {
+        Usuario object = service.fromUpdateDTO(objectDTO);
         service.update(object);
         return ResponseEntity.noContent().build();
     }

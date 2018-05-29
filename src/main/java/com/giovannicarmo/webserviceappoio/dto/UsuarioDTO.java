@@ -24,7 +24,6 @@ public class UsuarioDTO implements Serializable {
         nome = object.getNome();
         email = object.getEmail();
         telefone = object.getTelefone();
-        foto = object.getFoto();
         tipo = object.getTipo();
     }
 

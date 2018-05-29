@@ -26,7 +26,6 @@ public class Usuario implements Serializable{
     private String senha;
 
     private String telefone;
-    private String foto;
     private String tipo;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -121,14 +120,6 @@ public class Usuario implements Serializable{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public TipoUsuario getTipo() {

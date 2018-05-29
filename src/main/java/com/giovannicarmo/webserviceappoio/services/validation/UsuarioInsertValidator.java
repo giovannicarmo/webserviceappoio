@@ -24,7 +24,7 @@ public class UsuarioInsertValidator implements ConstraintValidator<UsuarioInsert
         List<FieldMessage> list = new ArrayList<>();
         Usuario aux = repository.findByEmail(objectDto.getEmail());
         if (aux != null)
-            list.add(new FieldMessage("email", "Existent email."));
+            list.add(new FieldMessage("email", "Email existente."));
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(e.getMessage())

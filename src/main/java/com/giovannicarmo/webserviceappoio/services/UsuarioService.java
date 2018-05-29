@@ -2,6 +2,7 @@ package com.giovannicarmo.webserviceappoio.services;
 import com.giovannicarmo.webserviceappoio.domain.Usuario;
 import com.giovannicarmo.webserviceappoio.dto.UsuarioNewDTO;
 import com.giovannicarmo.webserviceappoio.domain.enums.TipoUsuario;
+import com.giovannicarmo.webserviceappoio.dto.UsuarioUpdateDTO;
 import com.giovannicarmo.webserviceappoio.repositories.UsuarioRepository;
 import com.giovannicarmo.webserviceappoio.security.UserSS;
 import com.giovannicarmo.webserviceappoio.services.excepition.AuthorizationExcepition;
@@ -81,6 +82,13 @@ public class UsuarioService {
         Usuario usuario = new Usuario(objectDTO.getNome(), objectDTO.getEmail(),
                 passwordEncoder.encode(objectDTO.getSenha()), objectDTO.getTelefone(),
                 TipoUsuario.toEnum(objectDTO.getTipo()));
+        return usuario;
+    }
+
+    public Usuario fromUpdateDTO(UsuarioUpdateDTO objectDTO) {
+        Usuario usuario = new Usuario(objectDTO.getNome(), null,
+                passwordEncoder.encode(objectDTO.getSenha()), objectDTO.getTelefone(),
+                null);
         return usuario;
     }
 
